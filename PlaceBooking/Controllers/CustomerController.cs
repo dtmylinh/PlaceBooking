@@ -3,14 +3,11 @@ using PlaceBooking.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
-using System.Net.Mail;
-using System.Net;
 using Google.Apis.Gmail.v1;
 using System.IO;
 using Google.Apis.Auth.OAuth2;
@@ -18,8 +15,6 @@ using System.Threading;
 using Google.Apis.Util.Store;
 using Google.Apis.Services;
 using System.Text;
-using System.Threading.Tasks;
-using MimeKit;
 
 namespace PlaceBooking.Controllers
 {
@@ -27,7 +22,7 @@ namespace PlaceBooking.Controllers
     {
         private readonly string clientId = "844620552810-umuq8bscgjsrfh37v7jd1jlva2d5jmnd.apps.googleusercontent.com";
         private readonly string clientSecret = "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";
-        private readonly string redirectUri = "http://localhost:22222/Customer/GoogleCallback";
+        private readonly string redirectUri = "https://store165.xyz/Customer/GoogleCallback";
         private readonly string userInfoUrl = "https://www.googleapis.com/oauth2/v3/userinfo";
 
         private PlaceBookingDbContext db = new PlaceBookingDbContext();
@@ -356,7 +351,7 @@ namespace PlaceBooking.Controllers
                 string[] Scopes = { GmailService.Scope.MailGoogleCom };
                 UserCredential credential;
 
-                var path = Path.Combine(Server.MapPath("~/public/UserCredential/Credential.json"));
+                var path = Path.Combine(Server.MapPath("~/public/UserCredential/client_secret_445635.com.json"));
                 var pathUserCredential = Path.Combine(Server.MapPath("~/public/UserCredential"));
 
                 using (FileStream stream = new FileStream(Convert.ToString(path),
@@ -376,22 +371,22 @@ namespace PlaceBooking.Controllers
                 GmailService service = new GmailService(new BaseClientService.Initializer()
                 {
                     HttpClientInitializer = credential,
-                    ApplicationName = "YATRA.COM",
+                    ApplicationName = "DPLACE.COM",
                 });
 
 
                 // Tạo email
                 var email = new Google.Apis.Gmail.v1.Data.Message();
                 email.Raw = Convert.ToBase64String(Encoding.UTF8.GetBytes(
-                    $"From: vokhoi944@gmail.com\r\n" +
+                    $"From: DPLACE\r\n" +
                     $"To: {CustomerEmail} <{CustomerEmail}>\r\n" +
-                    $"Subject: YATRA.COM OTP \r\n" +
+                    $"Subject: DPLACE.COM OTP \r\n" +
                     $"\r\n" +
-                    $"Xin chào {CustomerName}, YATRA.COM vừa nhận được yêu cầu tạo tài khoản từ bạn, mã otp của bạn là: {otp}. Cảm ơn bạn đã đăng ký tài khoản tại website, Chúc bạn một ngày tốt lành!"
+                    $"Xin chào {CustomerName}, DPLACE.COM vừa nhận được yêu cầu tạo tài khoản từ bạn, mã otp của bạn là: {otp}. Cảm ơn bạn đã đăng ký tài khoản tại website, Chúc bạn một ngày tốt lành!"
                 ));
 
                 // Gửi email bằng Gmail API
-                service.Users.Messages.Send(email, "vokhoi944@gmail.com").ExecuteAsync();
+                service.Users.Messages.Send(email, "dplacebooking@gmail.com").ExecuteAsync();
 
             }
             catch (Exception ex)

@@ -39,10 +39,11 @@
                     <thead>
                         <tr>
                             <th>Số hợp đồng</th>
-                            <th>Tên hượp đồng</th>
+                            @*  <th>Tên trung tâm</th>*@
                             <th>Tên Khách hàng</th>
                             <th>Email</th>
                             <th>ngày tạo</th>
+                            <th>Số tiền</th>
                             <th>Trạng thái</th>
                             <th>Chức năng</th>
                             <th>ID</th>
@@ -54,11 +55,14 @@
 
                         <tr>
                             <td>@item.Code</td>
-                            <td>@item.NameRoom</td>
+                            @*                            <td>@item.NameRoom</td>*@
                             <td>@item.Name</td>
                             <td style="font-size:14px;">@Html.DisplayFor(modelItem => item.Email)</td>
                             <td>
-                                @item.CreateDate
+                                @item.CreateDate.ToString("dd/MM/yyyy")
+                            </td>
+                            <td>
+                                @item.Total.ToString("N0") VND
                             </td>
                             @if (item.Status == 1)
                             {

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 using PlaceBooking.Common;
 using PlaceBooking.Models;
 
@@ -26,19 +27,29 @@ namespace PlaceBooking.Areas.Admin.Controllers
         // GET: Admin/Orders/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+                if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Order order = db.Orders.Find(id);
+
+            List<int> listServiceint = !string.IsNullOrEmpty(order.ServiceId) ? (order.ServiceId?.Split(',')
+                   ?.Select(int.Parse)
+                   ?.ToList() ?? null) : null;
+
+            List<int> listMenuint = !string.IsNullOrEmpty(order.MenuId) ? (order.MenuId?.Split(',')
+                               ?.Select(int.Parse)
+                               ?.ToList() ?? null) : null;
+
+            ViewBag.Service = listServiceint != null ? db.ExtendsBookings?.Where(x => x.Type == 2 && listServiceint.Contains(x.ID))?.ToList() : null;
+            ViewBag.Menu = listMenuint != null ? db.ExtendsBookings?.Where(x => x.Type == 1 && listMenuint.Contains(x.ID))?.ToList() : null;
+
             if (order == null)
             {
                 return HttpNotFound();
             }
             return View(order);
         }
-       
-
    
         public ActionResult _BookingConnfig(int orderId)
         {
@@ -49,7 +60,6 @@ namespace PlaceBooking.Areas.Admin.Controllers
                 Room ticket = db.Rooms.Find(item.TicketId);
                 list1.Add(ticket);
             }
-
             return View("_BookingConnfig", list1.ToList());
         }
 

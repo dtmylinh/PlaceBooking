@@ -11,8 +11,8 @@ namespace PlaceBooking.MomoAPI
         public static readonly string partnerCode = "MOMOP6JQ20201004";
         public static readonly string accessKey = "IkOjzm9u3ibIdAHn";
         public static readonly string serectkey = "aLlILxnIGc1KlKDjDPqt9d4KwGt0KraY";
-        public static readonly string orderInfo = "THANH TOÁN DỊCH VỤ MUA VÉ XE";
-        public static readonly string returnUrl = "http://localhost:54015/confirm-orderPaymentOnline-momo";
-        public static readonly string notifyurl = "http://localhost:54015/cancel-order-momo";
+        public static readonly string orderInfo = "THANH TOÁN DỊCH VỤ ĐẶT ĐỊA ĐIỂM";
+        public static readonly string returnUrl = "https://store165.xyz/confirm-orderPaymentOnline-momo";
+        public static readonly string notifyurl = "https://store165.xyz/cancel-order-momo";
     }
 }

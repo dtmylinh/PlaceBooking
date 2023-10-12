@@ -11,22 +11,32 @@
         <div class="col-md-12">
             <div class="d-flex flex-column comment-section border-top">
                 <div class="bg-white p-2">
-                    <div class="d-flex flex-row user-info" style="border-top: 0.5px solid #808080;">
-@**@                    <img style="width:30px;height:30px;" class="rounded-circle" src="@item.Image" width="40">
-                        <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name" style="font-size: 16px; font-weight: bold;">@item.UserName</span><br /><span class="date text-black-50 text-success">Lúc: - @item.CreateDate.ToString("dd/MM/yyyy HH:mm:ss")</span></div>
+                    <div class="d-flex flex-row user-info" style="border-top: 0.5px solid #f6f5f5; margin-top:0;">
+
+                        <img style="width:40px;height:40px; display: inline-block; margin-bottom:30px;" src="@item.Image">
+                        <div class="d-flex flex-column justify-content-start ml-2" style="display: inline-block;">
+                            <span class="d-block font-weight-bold name" style="font-size: 16px; font-weight: bold;">@item.UserName</span>
+                            <br />
+                            <span class="date text-black-50 text-success">Lúc: - @item.CreateDate.ToString("dd/MM/yyyy HH:mm:ss")</span>
+                        </div>
                     </div>
-                    <div class="mt-4">
+
+                    <div>
                         <p class="comment-text">@item.Comment1</p>
                     </div>
                 </div>
-                @*<div class="bg-white">
-                    <div class="d-flex flex-row fs-12">
-                        <div class="like p-2 cursor">   <a href="#"><i class="fa fa-thumbs-o-up"></i><span class="ml-1">Trả lời</span></a></div>
-                        <div class="like p-2 cursor"><a href="#"><i class="fa fa-thumbs-o-up"></i><span class="ml-1">Xóa</span></a></div>
+                @if (ViewBag.userid == item.UserId)
+                {
+                    <div class="bg-white">
+                        <div class="fs-12">
+                            <div class="like p-2 cursor" style="display: inline-block;"><a href="~/comment/delete?Id=@item.ID&TopicId=@item.TopicId"><i class="fa fa-thumbs-o-up"></i><span class="ml-1">Xóa</span></a></div>
+                            <div class="like p-2 cursor" style="display: inline-block;"><a href="~/comment/edit/@item.ID"><i class="fa fa-thumbs-o-up"></i><span class="ml-1">Chỉnh sửa</span></a></div>
+                        </div>
                     </div>
-                </div>*@
+                }
             </div>
         </div>
     </div>
 }
+
 

@@ -1,7 +1,8 @@
 ﻿@if (Message.has_flash())
 {
     MessageModel ms = Message.get_flash();
-    <div class="float-left ">
-        <p class=" text-@ms.msg_css "><span class="font-weight-bold" > Thông báo:</span> @ms.msg</p>
+    <div class="float-left " style="padding:10px;">
+        <p class=" text-@ms.msg_css bg-@ms.msg_css" style="padding:10px;"><span class="font-weight-bold" style="font-weight:bold;"> Thông báo:</span> @ms.msg</p>
     </div>
 }
+

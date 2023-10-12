@@ -1,0 +1,67 @@
+﻿@model PlaceBooking.Models.ExtendsBooking
+@{
+    ViewBag.Title = "flightDetail";
+    Layout = "~/Views/Shared/_layOutSite.cshtml";
+}
+<script src="~/public/js/jquery.fancybox.min.js"></script>
+<link href="~/Public/css/jquery.fancybox.min.css" rel="stylesheet" />
+
+<section class="booking">
+    <form action="~/checkout/index" method="post" style="padding-bottom:100px;">
+        <div class="container bg-white" style="padding:20px;">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="booking-confirmed booking-outer">
+                        <div class="confirmation-title">
+                            <div class="form-title form-title-1">
+                                <h2 class="text-danger">
+                                    Chi tiết @if (@Model.Type == 1)
+                                    {<span> Thực đơn</span> }
+                                    else
+                                    {<span> Dịch vụ</span>}
+                                </h2>
+                            </div>
+                            <div class="payment-info detail">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <table class="table" style="margin-top:20px;">
+                                    <tbody>
+                                        <tr class="w-100">
+                                            <td class="title">
+                                                Tên @if (@Model.Type == 1)
+                                                {<span> Thực đơn</span> }
+                                                else
+                                                {<span> Dịch vụ</span>}
+                                            </td>
+                                            <td>@Model.Name</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="title">Giá dịch vụ</td>
+                                            <td class="b-id text-danger">@Model.Price.ToString("N0") VND (Chỉ tiền thuê địa điểm)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="title">Chi tiết</td>
+                                            <td class="b-id text-danger">@Html.Raw(Model.Details)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+<style>
+    .title {
+        font-size: 17px;
+        font-weight: bold;
+        padding-right: 50px;
+        color: #ff0000;
+    }
+</style>

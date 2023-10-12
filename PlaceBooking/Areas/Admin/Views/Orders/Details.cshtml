@@ -3,12 +3,16 @@
 @{
     ViewBag.Title = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_layOutAdmin.cshtml";
+    var service = ViewBag.Service;
+    var menu = ViewBag.Menu;
 }
 
 <div class="container bg-white">
     <div class="row">
         <div class="col-md-7">
-            <h3>Chi tiết Order</h3>
+            <div class="p-3">
+                <h3>Thông tin khách hàng</h3>
+            </div>
             <table class="table border">
                 <tbody>
                     <tr>
@@ -44,6 +48,14 @@
                         <td>@Model.Mess</td>
                     </tr>
                     <tr>
+                        <td class="title">Ngày</td>
+                        <td>@Model.DepartureDate.ToString("dd/MM/yyyy")</td>
+                    </tr>
+                    <tr>
+                        <td class="title">Khung giờ</td>
+                        <td>@Model.Scope</td>
+                    </tr>
+                    <tr>
                         <td class="title">Ngày tạo</td>
                         <td>@Model.CreateDate (m/d/y)</td>
                     </tr>
@@ -67,17 +79,66 @@
                         <td>@Model.DeliveryPaymentMethod.</td>
                     </tr>
                     <tr>
-                        <td class="title">Tổng tiền hợp đồng:</td>
+                        <td class="title">Tổng tiền:</td>
                         <td><h4 class="text-danger"> @Model.Total.ToString("N0") VND</h4></td>
                     </tr>
                 </tbody>
             </table>
 
         </div>
-     @*   <div class="col-md-5">
-            @Html.Action("_BookingConnfig", "Orders", new { orderId = Model.ID })
-
-        </div>*@
+        <div class="col-md-5">
+            @Html.Action("_BookingConnfig", "Orders", new { orderId = Model.Id })
+            @if (ViewBag.Service != null)
+            {
+                <div class="p-2">
+                    <h3>Dịch vụ</h3>
+                </div>
+                <table class="table border" style="margin-top:20px;">
+                    @foreach (var item in service)
+                    {
+                        <tbody>
+                            <tr>
+                                <td class="title text-danger" style="font-weight:bold">Tên dịch vụ</td>
+                                <td>@item.Name</td>
+                            </tr>
+                            <tr>
+                                <td class="title">Giá tiền</td>
+                                <td class="b-id text-danger">@item.Price.ToString("N0") VND</td>
+                            </tr>
+                            <tr>
+                                <td class="title"> Chi tiết</td>
+                                <td class="b-id text-danger">@Html.Raw(item.Details)</td>
+                            </tr>
+                        </tbody>
+                    }
+                </table>
+            }
+            @if (ViewBag.Menu != null)
+            {
+                <div class="p-2">
+                    <h3>Thực đơn</h3>
+                </div>
+                <table class="table border" style="margin-top:20px;">
+                    @foreach (var item in menu)
+                    {
+                        <tbody>
+                            <tr>
+                                <td class="title text-danger" style="font-weight:bold">Tên menu</td>
+                                <td>@item.Name</td>
+                            </tr>
+                            <tr>
+                                <td class="title">Giá tiền</td>
+                                <td class="b-id text-danger">@item.Price.ToString("N0") VND</td>
+                            </tr>
+                            <tr>
+                                <td class="title"> Chi tiết</td>
+                                <td class="b-id text-danger">@Html.Raw(item.Details)</td>
+                            </tr>
+                        </tbody>
+                    }
+                </table>
+            }
+        </div>
     </div>
 </div>
 <style>
@@ -85,6 +146,6 @@
         font-size: 17px;
         font-weight: bold;
         padding-right: 50px;
-        color: #ff0000;
+        color: brown;
     }
 </style>

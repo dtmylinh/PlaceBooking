@@ -2,16 +2,20 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_layOutSite.cshtml";
+
+    var service = ViewBag.Service;
+    var menu = ViewBag.Menu;
 }
 <section class="booking">
     <div class="container bg-white">
+        @Html.Partial("_MessgeAlert")
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <div class="booking-form booking-outer">
                     <div class="payment-info detail">
                         <div class="row">
                             <div style="margin-left:20px;">
-                                <h4 class="text-danger p-3"> Thông Tin Đặt phòng </h4>
+                                <h4 class="text-success p-3"> Thông Tin Đặt địa điểm </h4>
                             </div>
                             @{ var sum = 0;}
                             @foreach (var item in Model)
@@ -20,15 +24,15 @@
                                     <table>
                                         <tbody>
                                             <tr>
-                                                <td class="title">Tên phòng</td>
+                                                <td class="title">Tên địa điểm</td>
                                                 <td>@item.Name</td>
                                             </tr>
                                             <tr>
-                                                <td class="title">Giá phòng/ tháng</td>
-                                                <td class="b-id text-danger">@item.Price.ToString("N0") VND (không tính điện nước/phụ phí)</td>
+                                                <td class="title">Giá địa điểm</td>
+                                                <td class="b-id text-danger">@item.Price.ToString("N0") VND </td>
                                             </tr>
                                             <tr>
-                                                <td class="title">Loại phòng</td>
+                                                <td class="title">Loại địa điểm</td>
                                                 <td class="b-id text-danger">@item.RoomType</td>
                                             </tr>
                                             <tr>
@@ -44,6 +48,14 @@
                                                 <td>@item.GuestTotal</td>
                                             </tr>
                                             <tr>
+                                                <td class="title">Thời gian (yyyy/MM/dd)</td>
+                                                <td class="text-danger">@ViewBag.DepartureDate</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="title">Khung giờ</td>
+                                                <td class="text-danger">@ViewBag.Scope</td>
+                                            </tr>
+                                            <tr>
                                                 <td class="title">Hình ảnh</td>
                                                 <td><img height="100" src="~/Public/images/roomBooking/@item.Img" /></td>
                                             </tr>
@@ -52,69 +64,152 @@
                                 </div>
                                 sum += (int)item.Price;
                             }
-                            <h3 class="text-danger" style="padding:25px">Tổng tiền: @sum.ToString("N0") VND (tạm tính)</h3>
+
+
+
                         </div>
                     </div>
-                    <form action="~/Checkout/checkOut" method="post">
-                        <input type="hidden" value="@ViewBag.ve1" name="veOnvay" />
-                        <input type="hidden" value="@ViewBag.ve2" name="veReturn" />
-                        <input type="hidden" value="@sum" name="total" />
-                        <div class="row">
-                            <div class="form-group col-xs-12">
-                                <label>Tên khách hàng:</label>
-                                <input name="name" type="text" class="form-control" id="Name" placeholder="Tên của bạn." required>
-                            </div>
-                            <div class="form-group col-xs-6">
-                                <label>Email:</label>
-                                <input type="email" name="email" class="form-control" id="email" placeholder="abc@xyz.com" required>
-                            </div>
-                            <div class="form-group col-xs-6 col-left-padding">
-                                <label>SDT của bạn:</label>
-                                <input name="phone" type="text" class="form-control" id="phnumber" placeholder="0...." required />
-                            </div>
+                </div>
+            </div>
+            <div class="col-md-4">
 
-                            <div class="form-group col-xs-6">
-                                <label>Giới tính:</label>
-                                <select required name="gioitinh">
+                @if (service != null)
+                {
+                    <div class="col-md-12">
+                        <div style="margin-left:20px;">
+                            <h4 class="text-success p-3"> Thông tin dịch vụ </h4>
+                        </div>
+                        <table>
+                            @foreach (var item in service)
+                            {
+                                <tbody>
+                                    <tr>
+                                        <td class="title text-danger" style="font-weight:bold">Tên dịch vụ</td>
+                                        <td>@item.Name</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="title">Giá tiền</td>
+                                        <td class="b-id text-danger">@item.Price.ToString("N0") VND</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="title"> Chi tiết</td>
+                                        <td class="b-id text-danger">@Html.Raw(item.Details)</td>
+                                    </tr>
 
-                                    <option value="female" selected>Nam</option>
-                                    <option value="other">Nữ</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-xs-6 col-left-padding">
-                                <label>Quốc tịch:</label>
-                                <select required name="quoctich">
-                                    <option value="VN">Việt Nam</option>
-                                    <option value="K">Khác</option>
+                                </tbody>
+                                sum += (int)item.Price;
+                            }
+                        </table>
+                    </div>
+                }
 
-                                </select>
-                            </div>
-                            <div class="textarea col-xs-12">
-                                <label>Lời nhắn:</label>
-                                <textarea name="mess" placeholder="Lời nhắn của bạn cho chúng tôi"></textarea>
-                            </div>
-                            <div class="col-xs-12" style="margin:30px;">
-                                <div class="single-widget">
-                                    <h2>Hình thức thanh toán</h2>
-                                    <div class="content pl-5">
-                                        <div class="radio">
-                                            <div class=" row">
-                                                <div id="COD">
-                                                    <div style="max-width:900px;">
-                                                        <div style="padding-top:10px;padding-bottom:20px; border-top:0.5px solid #808080;">
-                                                            <div style="margin-left:30px;">
-                                                                <input type="radio" id="7" name="option_payment" value="COD" checked>
-                                                                <label for="7" class="text-success">
-                                                                    <span class="pl-2 text-secondary" style="font-size:15px;">Chuyển khoản</span>
-                                                                </label>
-                                                                <div style="padding:20px;">
-                                                                    <span>Ngân Hàng: TP Bank</span><br />
-                                                                    <span>Chủ Tk: Nguyễn Văn Tèo</span><br />
-                                                                    <span>STK: 04219019501</span>
-                                                                </div>
+
+                @if (menu != null)
+                {
+                    <div class="col-md-12">
+                        <div style="margin-left:20px;">
+                            <h4 class="text-success p-3"> Thông tin Menu </h4>
+                        </div>
+                        <table>
+                            <tbody>
+                                @foreach (var item in menu)
+                                {
+                                    <tr>
+                                        <td class="title text-danger" style="font-weight:bold">Tên menu</td>
+                                        <td>@item.Name</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="title">Giá tiền</td>
+                                        <td class="b-id text-danger">@item.Price.ToString("N0") VND</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="title"> Chi tiết</td>
+                                        <td class="b-id text-danger">@Html.Raw(item.Details)</td>
+                                    </tr>
+                                    sum += (int)item.Price;
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+
+
+                <h3 class="text-danger" style="padding:25px">Tổng tiền: @sum.ToString("N0") VND (tạm tính)</h3>
+            </div>
+            <div style="padding:20px;">
+                <form action="~/Checkout/checkOut" method="post">
+                    <input type="hidden" value="@ViewBag.ve1" name="veOnvay" />
+                    <input type="hidden" value="@ViewBag.ve2" name="veReturn" />
+                    <input type="hidden" value="@sum" name="total" />
+                    <input type="hidden" value="@ViewBag.idService" name="idService" />
+                    <input type="hidden" value="@ViewBag.idMenu" name="idMenu" />
+                    <input type="hidden" value="@ViewBag.departureDate" name="departureDate" />
+                    <input type="hidden" value="@ViewBag.Scope" name="Scope" />
+                    
+                    <div class="row">
+                        <div class="form-group col-xs-12">
+                            <label>Tên khách hàng:</label>
+                            <input name="name" type="text" class="form-control" id="Name" placeholder="Tên của bạn." required>
+                        </div>
+                        <div class="form-group col-xs-6">
+                            <label>Email:</label>
+                            <input type="email" name="email" class="form-control" id="email" placeholder="abc@xyz.com" required>
+                        </div>
+                        <div class="form-group col-xs-6 col-left-padding">
+                            <label>SDT của bạn:</label>
+                            <input name="phone" type="text" class="form-control" id="phnumber" placeholder="0...." required />
+                        </div>
+
+                        <div class="form-group col-xs-6">
+                            <label>Giới tính:</label>
+                            <select required name="gioitinh">
+
+                                <option value="female" selected>Nam</option>
+                                <option value="other">Nữ</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-xs-6 col-left-padding">
+                            <label>Quốc tịch:</label>
+                            <select required name="quoctich">
+                                <option value="VN">Việt Nam</option>
+                                <option value="K">Khác</option>
+
+                            </select>
+                        </div>
+                        <div class="textarea col-xs-12">
+                            <label>Lời nhắn:</label>
+                            <textarea name="mess" placeholder="Lời nhắn của bạn cho chúng tôi"></textarea>
+                        </div>
+                        <div class="col-xs-12" style="margin:30px;">
+                            <div class="single-widget">
+                                <h2>Hình thức thanh toán</h2>
+                                <div class="content pl-5">
+                                    <div class="radio">
+                                        <div class=" row">
+                                            <div id="COD">
+                                                <div style="max-width:900px;">
+                                                    <div style="padding-top:10px;padding-bottom:20px; border-top:0.5px solid #808080;">
+                                                        <div style="margin-left:30px;">
+                                                            <input type="radio" id="7" name="option_payment" value="COD" checked>
+                                                            <label for="7" class="text-success">
+                                                                <span class="pl-2 text-secondary" style="font-size:15px;">Chuyển khoản</span>
+                                                            </label>
+                                                            <div style="padding:20px;">
+                                                                <span>Ngân Hàng: TP Bank</span><br />
+                                                                <span>Chủ Tk: Nguyễn Văn Tèo</span><br />
+                                                                <span>STK: 04219019501</span>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </div>
+                                            </div>
+                                            <div style="padding-top:10px;padding-bottom:10px; border-top:0.5px solid #808080;">
+                                                <div style="padding-left:30px;">
+                                                    <input type="radio" id="4" name="option_payment" value="MOMO">
+                                                    <label for="4" class="text-success">
+                                                        <img style="width:100px" class=" pl-2 " src="~/public/images/momo.png" alt="Alternate Text" />
+                                                        <span class="pl-2 text-secondary" style="font-size:15px;"> Momo</span>
+                                                    </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -122,19 +217,18 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="container ">
-                            <div class="row">
-                                <div class="col-md-10">
+                    </div>
+                    <div class="container ">
+                        <div class="row">
+                            <div class="col-md-10">
 
-                                </div>
-
-                                <button class="btn-blue btn-red btn-style-1 " type="submit">Tiếp theo</button>
                             </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
 
+                            <button class="btn-blue btn-red btn-style-1 " type="submit">Tiếp theo</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 

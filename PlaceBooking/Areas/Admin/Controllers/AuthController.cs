@@ -54,6 +54,7 @@ namespace PlaceBooking.Areas.Admin.Controllers
                         userSession.AccessName = role.AccessName;
                         Session.Add(CommonConstants.USER_SESSION, userSession);
                         var i = Session["SESSION_CREDENTIALS"];
+                        Session["AccessName"] = role.AccessName;
                         Session["Admin_id"] = user.Id;
                         Session["Admin_user"] = user.Username;
                         Session["Admin_fullname"] = user.Fullname;

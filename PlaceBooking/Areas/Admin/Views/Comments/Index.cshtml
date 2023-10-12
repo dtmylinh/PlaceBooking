@@ -43,6 +43,7 @@
                             <th width="20%">Id tài khoản</th>
                             <th>Comment</th>
                             <th>ParentId</th>
+                            <th>Địa điểm</th>
                             <th width="20%">Chức Năng</th>
                             <th>ID</th>
                         </tr>
@@ -56,6 +57,7 @@
                             <td> @Html.DisplayFor(modelItem => item.UserId)</td>
                             <td style="font-size:14px;">@Html.DisplayFor(modelItem => item.Comment1)</td>
                             <td style="font-size:14px;">@Html.DisplayFor(modelItem => item.ParentID)</td>
+                            <td style="font-size:14px;"><a target="_blank" href="~/room-detail/@item.TopicId">Xem địa điểm</a>   </td>
                             <td>
                                 <a class="btn btn-sm btn-light text-danger border" href="@Url.Action("deleteTrash", "Comments", new { id = item.ID })"> <i class="fas fa-trash-alt"></i></a>
                             </td>

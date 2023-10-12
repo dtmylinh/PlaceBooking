@@ -8,14 +8,44 @@
     bool status = (bool)ViewBag.status;
 
 }
-@if (status == true)
-{
-    <span>Thanh toán Online Thành công Chúng tôi sẽ liện hệ với bạn sau <a class="text-danger" href="~/">Về trang chủ</a></span>
 
-}
-else
-{
-    <span>Thanh toasn Online Thất bại Vui lòng thử lại <a class="text-danger" href="~/">Về trang chủ</a></span>
 
-}
+<section class="booking">
+    <form action="~/checkout/index" method="post" style="padding-bottom:100px;">
+        <div class="container bg-white" style="padding:20px;">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="booking-confirmed booking-outer">
+                        <div class="confirmation-title">
+                            <div class="form-title form-title-1">
+                                <h2 class="text-danger">
+                                    Chi tiết thanh toán</h2>
+                            </div>
+                            <div class="payment-info detail">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                @if (status == true)
+                                {
+                                    <span>Thanh toán Online Thành công Chúng tôi sẽ liện hệ với bạn sau <a class="text-danger" href="~/">Về trang chủ</a></span>
+
+                                }
+                                else
+                                {
+                                    <span>Thanh toán MOMO Online Thất bại Vui lòng thử lại <a class="text-danger" href="~/">Về trang chủ</a></span>
+
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+
 

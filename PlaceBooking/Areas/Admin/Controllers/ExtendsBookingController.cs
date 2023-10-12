@@ -11,9 +11,7 @@ using PlaceBooking.Models;
 
 namespace PlaceBooking.Areas.Admin.Controllers
 {
-    
-    [CustomAuthorizeAttribute(RoleID = "ADMIN")]
-    [CustomAuthorizeAttribute(RoleID = "COPYWRITER")]
+    [CustomAuthorizeAttribute(RoleID = "SALESMAN")]
     public class ExtendsBookingController : BaseController
     {
         private PlaceBookingDbContext db = new PlaceBookingDbContext();
@@ -21,7 +19,7 @@ namespace PlaceBooking.Areas.Admin.Controllers
         // GET: Admin/Topic
         public ActionResult Index()
         {
-            
+            ViewBag.Accessname = Session["AccessName"].ToString();
             var list = db.ExtendsBookings.Where(m => m.Status !=0).OrderByDescending(m => m.ID).ToList();
             return View(list);
         }

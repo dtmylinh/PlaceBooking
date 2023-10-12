@@ -27,5 +27,9 @@ namespace PlaceBooking.Models
         public int UserId { get; set; }
         public int RoomId { get; set; }
         public string NameRoom { get; set; }
+        public string ServiceId { get; set; }
+        public string MenuId { get; set; }
+        public DateTime DepartureDate { get; set; }
+        public string Scope { get; set; }
     }
 }

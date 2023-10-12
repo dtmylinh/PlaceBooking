@@ -63,13 +63,27 @@
                             <td style="font-size:14px;">@item.RoomId</td>
                             <td style="font-size:14px;">@item.CreateDate</td>
                             <td>
-                                @if (item.Status == 1)
+                                @if (ViewBag.Accessname == "ADMIN")
                                 {
-                                    <a class="btn btn-sm btn-light text-success border a33" href="@Url.Action("Status", "ExtendsBooking", new { id = item.ID })"> <i class="fas fa-toggle-on"></i> </a>
+                                    if (item.Status == 1)
+                                    {
+                                        <a class="btn btn-sm btn-light text-success border a33" href="@Url.Action("Status", "ExtendsBooking", new { id = item.ID })"> <i class="fas fa-toggle-on"></i> </a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-sm btn-light text-danger border a33" href="@Url.Action("Status", "ExtendsBooking", new { id = item.ID })"> <i class="fas fa-toggle-off"></i> </a>
+                                    }
                                 }
                                 else
                                 {
-                                    <a class="btn btn-sm btn-light text-danger border a33" href="@Url.Action("Status", "ExtendsBooking", new { id = item.ID })"> <i class="fas fa-toggle-off"></i> </a>
+                                    if (item.Status == 1)
+                                    {
+                                        <a class="btn btn-sm btn-light text-success border a33"> Đã duyệt </a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-sm btn-light text-danger border a33">Chờ duyệt </a>
+                                    }
                                 }
                                 <a class="btn btn-sm btn-light text-danger border" href="@Url.Action("Deltrash", "ExtendsBooking", new { id = item.ID })"> <i class="fas fa-trash-alt"></i></a>
                                 <a class="btn btn-sm btn-light text-warning border" href="@Url.Action("Edit", "ExtendsBooking", new { id = item.ID })">

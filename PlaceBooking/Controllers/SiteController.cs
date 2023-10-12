@@ -22,17 +22,36 @@ namespace PlaceBooking.Controllers
             if (page == null) page = 1;
             int pageSize = 8;
             int pageNumber = (page ?? 1);
-            int noithat = int.Parse(fc["noithat"]);
+
+            string LoaiTiec = fc["LoaiTiec"].ToString();
+
+            ViewBag.LoaiTiec = LoaiTiec.ToString();
+
+
             int songuoi = int.Parse(fc["songuoi"]);
-            ViewBag.songuoi = songuoi;
+
+            ViewBag.songuoi = songuoi.ToString();
+            // Địa điểm
             string departure_address = fc["departure_address"];
 
+            ViewBag.departure_address = fc["departure_address"];
             float soTienTu = float.Parse(fc["soTienTu"]);
             float soTienDen = float.Parse(fc["soTienDen"]);
 
+            ViewBag.SoTienTu = soTienTu.ToString();
+            ViewBag.SoTienDen = soTienDen.ToString();
+
+            if (soTienTu > soTienDen)
+            {
+                // Báo lỗi
+            }
+
             var list = db.Rooms.Where(m => m.DepartureAddress.Contains(departure_address)
-            && m.GuestTotal == songuoi
-            && (m.Price >= soTienTu && m.Price <= soTienDen)).ToList();
+            && m.RoomType == LoaiTiec
+            && m.GuestTotal >= songuoi
+            && (m.Price >= soTienTu && m.Price <= soTienDen)
+            && m.Status != 0
+            ).ToList();
             return View("roomSearchOnway", list.ToPagedList(pageNumber, pageSize));
         }
 
@@ -43,9 +62,17 @@ namespace PlaceBooking.Controllers
             ViewBag.url = "chuyen-xe";
             int pageNumber = (page ?? 1);
             ViewBag.breadcrumb = "Tất cả chuyến bay";
-            var list_room = db.Rooms.Where(m => m.Status == 1).ToList();
+            var list_room = db.Rooms.Where(m => m.Status != 0).ToList();
             return View("allroom", list_room.ToPagedList(pageNumber, pageSize));
         }
+
+        [HttpGet]
+        public ActionResult ExtendsBookingDetail(int id)
+        {
+            var ExtendsBookingDetail = db.ExtendsBookings.Where(m => m.ID == id).FirstOrDefault();
+            return View("extendsBookingDetail", ExtendsBookingDetail);
+        }
+
         public ActionResult postOftoPic(int? page, string slug)
         {
             if (page == null) page = 1;
@@ -82,7 +109,7 @@ namespace PlaceBooking.Controllers
             int pageNumber = (page ?? 1);
             ViewBag.url = "tim-kiem-bai-viet?keyw=" + keyw + "";
             @ViewBag.nameTopic = "Tim kiếm từ khóa: " + keyw;
-            var list = db.Posts.Where(m => m.Title.Contains(keyw) || m.Detail.Contains(keyw)).OrderBy(m => m.ID);
+            var list = db.Posts.Where(m => m.Title.Contains(keyw)).OrderBy(m => m.ID);
             return View("postOftoPic", list.ToList().ToPagedList(pageNumber, pageSize));
         }
         public ActionResult PostDetal(string slug)
@@ -104,7 +131,11 @@ namespace PlaceBooking.Controllers
                 ViewBag.name = Session["user"];
                 ViewBag.id = int.Parse(Session["id"].ToString());
             }
-            var single = db.Rooms.Where(m => m.Status == 1 && m.Id == id).First();
+
+            ViewBag.Service = db.ExtendsBookings.Where(x => x.Type == 2 && x.RoomId == id && x.Status == 1).ToList();
+            ViewBag.Menu = db.ExtendsBookings.Where(x => x.Type == 1 && x.RoomId == id && x.Status == 1).ToList();
+
+            var single = db.Rooms.Where(m => /*m.Status == 1 &&*/ m.Id == id).First();
             return View("roomDetail", single);
         }
         public ActionResult lienHe()

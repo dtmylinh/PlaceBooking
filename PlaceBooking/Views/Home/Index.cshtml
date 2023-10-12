@@ -13,13 +13,12 @@
             </div>
             <form action="~/Site/roomSearch" method="POST" id="form-search">
                 <div class="radio" align="center">
-                    <label><input value="1" type="radio" id="typeticket" name="noithat" checked>Tiệc cưới</label>
-                    <label><input value="0" type="radio" id="typeticket" name="noithat">Sinh nhật</label>
-                    <label><input value="2" type="radio" id="typeticket" name="noithat">Sự kiện</label>
-                    <label><input value="3" type="radio" id="typeticket" name="noithat">Khác</label>
+                    <label><input value="TiecCuoi" type="radio" id="typeticket" name="LoaiTiec" checked>Tiệc cưới</label>
+                    <label><input value="SinhNhat" type="radio" id="typeticket" name="LoaiTiec">Sinh nhật</label>
+                    <label><input value="SuKien" type="radio" id="typeticket" name="LoaiTiec">Sự kiện</label>
+                    <label><input value="Khac" type="radio" id="typeticket" name="LoaiTiec">Khác</label>
                 </div>
                 <input type="hidden" id="ticketCheck" value="" />
-
                 <div class="row">
                     <div class="col-md-6 col-sm-6">
                         <div class="table_item">
@@ -98,16 +97,15 @@
                         <div class="table_item">
                             <div class="form-group">
                                 <select name="songuoi" class=" form-control" tabindex="1">
-                                    <option value="2">Số người (Mặc định 100)</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                    <option value="200">200</option>
-                                    <option value="400">400</option>
-                                    <option value="500">500</option>
-                                    <option value="600">600</option>
-                                    <option value="800">800</option>
-                                    <option value="1000">1000</option>
-                                    <option value="1100">Trên 1000</option>
+                                    <option value="100">Số người (Mặc định 100)</option>
+                                    <option value="50">50 trở lên</option>
+                                    <option value="100">100 trở lên</option>
+                                    <option value="200">200 trở lên</option>
+                                    <option value="400">400 trở lên</option>
+                                    <option value="500">500 trở lên</option>
+                                    <option value="600">600 trở lên</option>
+                                    <option value="800">800 trở lên</option>
+                                    <option value="1000">1000 Trở lên</option>
                                 </select>
                                 <i class="flaticon-box"></i>
                             </div>
@@ -118,15 +116,15 @@
                             <div class="form-group">
                                 <select name="soTienTu" class=" form-control" tabindex="1">
                                     <option value="1000000">Số tiền từ 1.000.000 VND</option>
-                                    <option value="2000000">Số tiền từ 20.000.000 VND</option>
-                                    <option value="3000000">Số tiền từ 30.000.000 VND</option>
-                                    <option value="4000000">Số tiền từ 40.000.000 VND</option>
-                                    <option value="5000000">Số tiền từ 50.000.000 VND</option>
-                                    <option value="6000000">Số tiền từ 60.000.000 VND</option>
-                                    <option value="7000000">Số tiền từ 70.000.000 VND</option>
-                                    <option value="8000000">Số tiền từ 80.000.000 VND</option>
-                                    <option value="9000000">Số tiền từ 90.000.000 VND</option>
-                                    <option value="10000000">Số tiền từ 100.000.000 VND</option>
+                                    <option value="20000000">Số tiền từ 20.000.000 VND</option>
+                                    <option value="30000000">Số tiền từ 30.000.000 VND</option>
+                                    <option value="40000000">Số tiền từ 40.000.000 VND</option>
+                                    <option value="50000000">Số tiền từ 50.000.000 VND</option>
+                                    <option value="60000000">Số tiền từ 60.000.000 VND</option>
+                                    <option value="70000000">Số tiền từ 70.000.000 VND</option>
+                                    <option value="80000000">Số tiền từ 80.000.000 VND</option>
+                                    <option value="90000000">Số tiền từ 90.000.000 VND</option>
+                                    <option value="100000000">Số tiền từ 100.000.000 VND</option>
                                 </select>
                                 <i class="flaticon-box"></i>
                             </div>
@@ -136,15 +134,17 @@
                         <div class="table_item">
                             <div class="form-group">
                                 <select name="soTienDen" class=" form-control" tabindex="1">
-                                    <option value="2000000">Số tiền đến 20.000.000 VND</option>
-                                    <option value="3000000">Số tiền đến 30.000.000 VND</option>
-                                    <option value="4000000">Số tiền đến 40.000.000 VND</option>
-                                    <option value="5000000">Số tiền đến 50.000.000 VND</option>
-                                    <option value="6000000">Số tiền đến 60.000.000 VND</option>
-                                    <option value="7000000">Số tiền đến 70.000.000 VND</option>
-                                    <option value="8000000">Số tiền đến 80.000.000 VND</option>
-                                    <option value="9000000">Số tiền đến 90.000.000 VND</option>
-                                    <option value="10000000">Số tiền đến 100.000.000 VND</option>
+                                    <option value="5000000">Số tiền đến 5.000.000 VND</option>
+                                    <option value="10000000">Số tiền đến 10.000.000 VND</option>
+                                    <option value="20000000">Số tiền đến 20.000.000 VND</option>
+                                    <option value="30000000">Số tiền đến 30.000.000 VND</option>
+                                    <option value="40000000">Số tiền đến 40.000.000 VND</option>
+                                    <option value="50000000">Số tiền đến 50.000.000 VND</option>
+                                    <option value="60000000">Số tiền đến 60.000.000 VND</option>
+                                    <option value="70000000">Số tiền đến 70.000.000 VND</option>
+                                    <option value="80000000">Số tiền đến 80.000.000 VND</option>
+                                    <option value="90000000">Số tiền đến 90.000.000 VND</option>
+                                    <option value="100000000">Số tiền đến 100.000.000 VND</option>
                                 </select>
                                 <i class="flaticon-box"></i>
                             </div>
@@ -167,7 +167,7 @@
     <div class="container">
         <div class="section-title text-center">
             <h2>Các bài viết nổi bật</h2>
-            <a href="#">Xem tất cả các review nổi bật <i class="fa fa-long-arrow-right"></i></a>
+            <a href="~/tin-tuc">Xem tất cả các review nổi bật <i class="fa fa-long-arrow-right"></i></a>
         </div>
         <div class="row">
             @foreach (var item in Model)
@@ -178,16 +178,16 @@
                             <img src="~/public/images/post/@item.Img" alt="Image">
                         </div>
                         <div class="destination-content">
-                            <h6>VÉ MỘT CHIỀU</h6>
+                            <h6>GIỚI THIỆU ĐỊA ĐIỂM</h6>
                             <h3><a href="~/chi-tiet-bai-viet/@item.Slug">@item.Title</a></h3>
                             <p class="package-days1"><i class="flaticon-time"></i>Ngày tạo: @item.CreatedAt.ToString("dd-MM-yyyy")</p>
-                            <div class="deal-rating">
+                            @*<div class="deal-rating">
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
-                            </div>
+                            </div>*@
                             <div class="tour-price">
                                 <a href="~/chi-tiet-bai-viet/@item.Slug"><span class="tour-tail">Xem Ngay</span></a>
                             </div>

@@ -80,10 +80,6 @@
                         </select>
                     </div>
                     <div>
-                        <label for="psw"><span class="text-secondary font-weight-bold">Ngày cho thuê</span></label>
-                        <input name="DepartureDate" class="form-control" type="date" value="@Model.DepartureDate.ToString("yyyy-MM-dd")" required />
-                    </div>
-                    <div>
                         <label for="psw"><span class="text-secondary font-weight-bold">Số lượng người</span></label>
                         @Html.EditorFor(model => model.GuestTotal, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
                         @Html.ValidationMessageFor(model => model.GuestTotal, "", new { @class = "text-danger" })
@@ -99,7 +95,6 @@
                     <div>
                         <label for="psw"><span class="text-secondary font-weight-bold">Trạng thái</span></label>
                         <select name="status" class="selectpicker form-control" tabindex="1" required>
-                            <option value="1">Hiện</option>
                             <option value="2">Ẩn</option>
                         </select>
                     </div>

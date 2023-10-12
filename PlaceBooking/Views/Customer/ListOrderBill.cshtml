@@ -12,13 +12,9 @@
                         <thead>
                             <tr>
                                 <th>Mã hợp đồng</th>
-                                <th width="30%">Tên khách hàng</th>
-                                <th width="20%">Hóa đơn tháng</th>
-                                <th width="20%">Thanh toán</th>
-                                <th width="20%">PTTT</th>
-                                <th width="20%">Tiền điện </th>
-                                <th width="20%">Tiền nước</th>
-                                <th width="20%">Bill Tháng</th>
+                                <th width="30%">Tên hóa đơn</th>
+                                <th width="20%">Trạng thái thanh toán</th>
+                                <th width="20%">Hình thức thanh toán</th>
                                 <th width="20%">Tổng tiền</th>
                             </tr>
                         </thead>
@@ -28,7 +24,6 @@
                             <tr>
                                 <td style="font-size:14px;">@Html.DisplayFor(modelItem => item.OrderCode)</td>
                                 <td><a class=" font-weight-bold card-link " href=""> @item.Name</a></td>
-                                <td> @item.BillMonth.ToString("dd/MM/yyyy")</td>
                                 <td style="font-size:14px;">
                                     @if (item.PaymentStatus == 1)
                                     {
@@ -40,11 +35,17 @@
                                     }
                                 </td>
                                 <td style="font-size:14px;">
-                                    <p class="text-danger"> Chuyển khoản</p>
+                                    @if (item.PaymentType == 2)
+                                    {
+                                        <p class="text-danger"> Ví MoMo</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="text-danger"> Chuyển khoản</p>
+                                    }
+
+
                                 </td>
-                                <td><a class=" font-weight-bold card-link " href=""> @item.ElectricityBillTotal.ToString("N0") VND</a></td>
-                                <td><a class=" font-weight-bold card-link " href=""> @item.WaterMoneyTotal.ToString("N0") VND</a></td>
-                                <td><a class=" font-weight-bold card-link " href=""> @item.BillMonth.ToString("dd/MM/yyyy")</a></td>
                                 <td><a class=" font-weight-bold card-link " href=""> @item.Total.ToString("N0") VND</a></td>
                             </tr>
                             }

@@ -7,13 +7,114 @@
 <link href="~/Public/css/jquery.fancybox.min.css" rel="stylesheet" />
 
 <section class="booking">
-    <div class="container bg-white" style="padding:20px;">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="booking-confirmed booking-outer">
-                    <div class="confirmation-title">
+    <form action="~/checkout/index" method="post">
+        <div class="container bg-white" style="padding:20px;">
+
+            <div class="row">
+                @Html.Partial("_MessgeAlert")
+                <div class="col-md-8">
+                    <div class="booking-confirmed booking-outer">
+                        <div class="confirmation-title">
+                            <div class="form-title form-title-1">
+                                <h2 class="text-danger">Chi tiết dịa điểm</h2>
+                            </div>
+                            <div class="payment-info detail">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <table class="table" style="margin-top:20px;">
+                                    <tbody>
+                                        <tr class="w-100">
+                                            <td class="title">Tên địa điểm</td>
+                                            <td>@Model.Name</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="title">Giá thuê/ Ngày</td>
+                                            <td class="b-id text-danger">@Model.Price.ToString("N0") VND (Chỉ tiền thuê địa điểm)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="title">Loại sự kiện</td>
+                                            <td class="b-id text-danger">@Model.RoomType</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="title">Tỉnh thành</td>
+                                            <td>@Model.DepartureAddress</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="title">Địa chỉ</td>
+                                            <td>@Model.FullAddress</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="title">Số người</td>
+                                            <td>@Model.GuestTotal</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-title form-title-1">
+                                    <h2 class="text-danger">Mô tả chi tiết</h2>
+                                </div>
+                                <div>
+                                    <p>@Html.Raw(Model.Description)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-title form-title-1">
+                        <h2 class="text-danger">Hình ảnh</h2>
+                    </div>
+                    <div class="payment-info detail">
+                        <div class="row">
+                            <div class="col-md-12">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <a href="~/Public/images/roomBooking/@Model.Img" data-fancybox="group" data-caption="@Model.Name">
+                            <img height="250" class="p-2" src="~/Public/images/roomBooking/@Model.Img" />
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4" style="padding-top:30px;">
+                    <div class="form-title form-title-1">
+                        <h3 class="text-secondary">Chọn dịch vụ <h3>
+                    </div>
+                    <div class="payment-info detail">
+                        <div class="row">
+                            <div class="col-md-12">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="container mt-4">
+                            @if (ViewBag.Service.Count > 0)
+                            {
+                                foreach (var item in ViewBag.Service)
+                                {
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="idService" id="@item.ID" value="@item.ID">
+                                        <label class="form-check-label" for="@item.ID">
+                                            @item.Name <a href="~/site/ExtendsBookingDetail/@item.ID" style="color:blue;">Xem Chi tiết</a>
+                                        </label>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <span class="text-danger"> Không có dịch vụ nào </span>
+                            }
+                        </div>
+
+                    </div>
+                    <div>
                         <div class="form-title form-title-1">
-                            <h2 class="text-danger">Chi tiết phòng</h2>
+                            <h3 class="text-secondary">Chọn thực đơn</h3>
                         </div>
                         <div class="payment-info detail">
                             <div class="row">
@@ -21,67 +122,91 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <table class="table" style="margin-top:20px;">
-                                <tbody>
-                                    <tr class="w-100">
-                                        <td class="title">Tên phòng</td>
-                                        <td>@Model.Name</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="title">Giá phòng/ tháng</td>
-                                        <td class="b-id text-danger">@Model.Price.ToString("N0") VND (không tính điện nước/phụ phí)</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="title">Loại phòng</td>
-                                        <td class="b-id text-danger">@Model.RoomType</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="title">Tỉnh thành</td>
-                                        <td>@Model.DepartureAddress</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="title">Địa chỉ</td>
-                                        <td>@Model.FullAddress</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="title">Số người</td>
-                                        <td>@Model.GuestTotal</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="form-title form-title-1">
-                                <h2 class="text-danger">Mô tả chi tiết</h2>
+                        <div>
+                            <div class="container mt-4">
+                                @if (ViewBag.Menu.Count > 0)
+                                {
+                                    foreach (var item in ViewBag.Menu)
+                                    {
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="idMenu" id="@item.ID" value="@item.ID">
+                                            <label class="form-check-label" for="@item.ID">
+                                                @item.Name <a href="~/site/ExtendsBookingDetail/@item.ID" style="color:blue;">Xem Chi tiết</a>
+                                            </label>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <span class="text-danger"> Không có thực đơn nào </span>
+                                }
                             </div>
-                            <div>
-                                <p>@Html.Raw(Model.Description)</p>
+
+
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-title form-title-1">
+                            <h3 class="text-danger">Chọn Ngày</h3>
+                        </div>
+                        <div>
+                            <input name="departureDate" class="form-control" type="date" value="" required min="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-title form-title-1" style="padding-top:20px">
+                            <h3 class="text-danger">Chọn khung giờ</h3>
+                        </div>
+                        <div class="payment-info detail">
+                            <div class="row">
+                                <div class="col-md-12">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="container mt-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="scope" id="scope_1" value="Sáng (7:00 đến 12:00)" required>
+                                    <label class="form-check-label" for="scope_1">
+                                        Sáng (7:00 đến 12:00)
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="scope" id="scope_2" value="Trưa (13:00 đến 18:00)" required>
+                                    <label class="form-check-label" for="scope_2">
+                                        Trưa (13:00 đến 18:00)
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="scope" id="scope_3" value="Tối (19:00 đến 21:00)" required>
+                                    <label class="form-check-label" for="scope_3">
+                                        Tối (19:00 đến 21:00)
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="form-title form-title-1">
-                    <h2 class="text-danger">Hình ảnh</h2>
-                </div>
-                <div class="payment-info detail">
+            <div style="padding-top:50px">
+                <input type="hidden" name="idRoom" value="@Model.Id" />
+                <div class="container ">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-10">
                         </div>
+                        @if (Model.Status == 1)
+                        {
+                            <button class="btn-blue btn-red btn-style-1 " type="submit">Tiếp theo</button>
+                        }
+                        else
+                        {
+                            <span class="text-danger"> Địa điểm tạm đóng cửa</span>
+                        }
                     </div>
-                </div>
-                <div>
-                    <a href="~/Public/images/roomBooking/@Model.Img" data-fancybox="group" data-caption="@Model.Name">
-                        <img height="250" class="p-2" src="~/Public/images/roomBooking/@Model.Img" />
-                    </a>
                 </div>
             </div>
         </div>
-    </div>
-
-
+    </form>
     <div class="container bg-white col" style="padding:20px;">
         <h2>Bình Luận</h2>
         @if (ViewBag.name != "")
@@ -94,7 +219,7 @@
                             <input type="hidden" name="parentId" value="0" />
                             <input type="hidden" name="type" value="2" />
                             <input type="hidden" name="image" value="https://www.translitescaffolding.com/wp-content/uploads/2013/06/user-avatar.png" />
-@*                            <img class="rounded-circle" src="https://i.pinimg.com/550x/e5/b5/7e/e5b57e95b4157c98b43090584290c9dc.jpg" width="40">*@
+                            @*                            <img class="rounded-circle" src="https://i.pinimg.com/550x/e5/b5/7e/e5b57e95b4157c98b43090584290c9dc.jpg" width="40">*@
                             <textarea class="form-control ml-1 shadow-none" name="comment1" placeholder="Nhập bình luận của bạn"></textarea>
                         </div>
                         <div class="mt-2 text-right">

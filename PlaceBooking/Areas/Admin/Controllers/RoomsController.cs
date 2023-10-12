@@ -21,6 +21,7 @@ namespace PlaceBooking.Areas.Admin.Controllers
         // GET: Admin/Tickets
         public ActionResult Index()
         {
+            ViewBag.Accessname = Session["AccessName"].ToString();
             return View(db.Rooms.Where(m=>m.Status != 0).OrderByDescending(x=>x.Id).ToList());
         }
 

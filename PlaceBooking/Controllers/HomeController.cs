@@ -13,6 +13,8 @@ namespace PlaceBooking.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            return Redirect("~/admin");
+
             var listPost = db.Posts.Where(m => m.Status == 1 && m.Topid == 20).Take(3).ToList();
             return View(listPost);
         }

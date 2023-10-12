@@ -1,26 +1,37 @@
 ﻿@model IEnumerable<PlaceBooking.Models.Room>
-<h2>Các vé đã book</h2>
+<div class="p-2">
+    <h3>Địa điểm</h3>
+</div>
+
 @foreach (var item in Model)
 {
     
-    <table class="table border" style="margin-top:20px;">
+<table class="table border" style="margin-top:20px;">
         <tbody>
-            <tr>
-                <td class="title">Tổng tiền</td>
-                <td class="b-id text-danger">@item.Price.ToString("N0") VND</td>
+            <tr class="w-100">
+                <td class="title">Tên địa điểm</td>
+                <td>@item.Name</td>
             </tr>
             <tr>
-                <td class="title">Thời gian xuất bến</td>
-                <td>@item.DepartureDate.ToString("dd-MM-yyyy") ||  Lúc @item.DepartureDate.ToString("hh:mm tt")</td>
+                <td class="title">Giá thuê/ Ngày</td>
+                <td class="b-id text-danger">@item.Price.ToString("N0") VND (Chỉ tiền thuê địa điểm)</td>
             </tr>
             <tr>
-                <td class="title">Nơi xuất phát (Bến Xe)</td>
-                <td>@item.PlaceDetail</td>
+                <td class="title">Loại sự kiện</td>
+                <td class="b-id text-danger">@item.RoomType</td>
             </tr>
             <tr>
-                <td class="title">Nơi đến</td>
+                <td class="title">Tỉnh thành</td>
+                <td>@item.DepartureAddress</td>
+            </tr>
+            <tr>
+                <td class="title">Địa chỉ</td>
                 <td>@item.FullAddress</td>
             </tr>
+            <tr>
+                <td class="title">Số người</td>
+                <td>@item.GuestTotal</td>
+            </tr>
         </tbody>
-    </table>
+</table>
 }

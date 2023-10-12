@@ -2,9 +2,11 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_layOutSite.cshtml";
+    var service = ViewBag.Service1;
+    var menu = ViewBag.Menu1;
 }
-<section class="booking">
-    <div class="container bg-white">
+<section class="booking" style="padding-bottom:50px;">
+    <div class="container bg-white" style="padding-bottom:50px;>
         <div class="row">
             <div class="col-md-8">
                 <div class="booking-confirmed booking-outer">
@@ -12,7 +14,7 @@
                         <div class="form-title form-title-1">
                             <h2 class="text-danger">Tạo hợp đồng thành công</h2>
                         </div>
-                        <p class="text-success">Thông tin cụ thể đã được gửi tới email của bạn.</p>
+                       @* <p class="text-success">Thông tin cụ thể đã được gửi tới email của bạn.</p>*@
                         <div class="payment-info detail">
                             <div class="row">
                                 <div class="col-md-12">
@@ -37,10 +39,6 @@
                                                     <td>@Model.Phone</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="title">Số người</td>
-                                                    <td>@Model.GuestTotal</td>
-                                                </tr>
-                                                <tr>
                                                     <td class="title">Giới tính</td>
                                                     <td>@Model.Gioitinh</td>
                                                 </tr>
@@ -49,12 +47,20 @@
                                                     <td>@Model.Quoctich</td>
                                                 </tr>
                                                 <tr>
+                                                    <td class="title">Thời gian (yyyy-MM-dd)</td>
+                                                    <td class="text-danger">@Model.DepartureDate.ToString("yyyy-MM-dd")</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="title">Khung giờ</td>
+                                                    <td class="text-danger">@Model.Scope</td>
+                                                </tr>
+                                                <tr>
                                                     <td class="title">Ghi chú</td>
                                                     <td>@Model.Mess</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="title">Ngày tạo</td>
-                                                    <td>@Model.CreateDate (m/d/y)</td>
+                                                    <td>@Model.CreateDate</td>
                                                 </tr>
                                                 @if (Model.StatusPayment == 1)
                                                 {
@@ -76,7 +82,7 @@
                                                     <td>@Model.DeliveryPaymentMethod.</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="title">Tổng tiền hợp đồng:</td>
+                                                    <td class="title">Tổng tiền:</td>
                                                     <td><h4 class="text-danger"> @Model.Total.ToString("N0") VND</h4></td>
                                                 </tr>
                                             </tbody>
@@ -88,7 +94,63 @@
                     </div>
                    
                 </div>
-            </div>  
+            </div> 
+            <div class="col-md-4">
+                @if (service != null)
+                {
+                    <div class="col-md-12">
+                        <div style="margin-left:20px;">
+                            <h4 class="text-success p-3"> Thông tin dịch vụ </h4>
+                        </div>
+                        <table>
+                            @foreach (var item in service)
+                            {
+                                <tbody>
+                                    <tr>
+                                        <td class="title text-danger" style="font-weight:bold">Tên dịch vụ</td>
+                                        <td>@item.Name</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="title">Giá tiền</td>
+                                        <td class="b-id text-danger">@item.Price.ToString("N0") VND</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="title"> Chi tiết</td>
+                                        <td class="b-id text-danger">@Html.Raw(item.Details)</td>
+                                    </tr>
+                                </tbody>
+                            }
+                        </table>
+                    </div>
+                }
+                @if (menu != null)
+                {
+                    <div class="col-md-12">
+                        <div style="margin-left:20px;">
+                            <h4 class="text-success p-3"> Thông tin Menu </h4>
+                        </div>
+                        <table>
+                            @foreach (var item in menu)
+                            {
+                                <tbody>
+                                    <tr>
+                                        <td class="title text-danger" style="font-weight:bold">Tên menu</td>
+                                        <td>@item.Name</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="title">Giá tiền</td>
+                                        <td class="b-id text-danger">@item.Price.ToString("N0") VND</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="title"> Chi tiết</td>
+                                        <td class="b-id text-danger">@Html.Raw(item.Details)</td>
+                                    </tr>
+                                </tbody>
+                            }
+                        </table>
+                    </div>
+                }
+                </div>
         </div>
     </div>
 </section>

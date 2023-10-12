@@ -39,7 +39,6 @@
                         <tr>
                             <th>Hình ảnh</th>
                             <th>Tên trung tâm</th>
-                            <th>Tỉnh thành</th>
                             <th>Giá</th>
                             <th>Trạng thái</th>
                             <th>Chức năng</th>
@@ -53,10 +52,9 @@
                             <tr>
                                 <td> <img width="50" src="~/Public/images/roomBooking/@item.Img" /></td>
                                 <td>@item.Name</td>
-                                <td style="font-size:14px;">@item.DepartureDate.ToString("dd/MM/yyyy")</td>
                                 <td style="font-size:14px;">@item.Price.ToString("N0") VND</td>
                                 <td style="font-size:14px;">
-                                    @if (item.IsBooking == 1)
+                                    @if (item.Status == 1)
                                     {
                                         <p class="text-success"> Đang mở cho thuê</p>
                                     }
@@ -66,13 +64,27 @@
                                     }
                                 </td>
                                 <td>
-                                    @if (item.Status == 1)
+                                    @if (ViewBag.Accessname == "ADMIN")
                                     {
-                                        <a class="btn btn-sm btn-light text-success border a33" href="@Url.Action("Status", "Rooms", new { id = item.Id })"> <i class="fas fa-toggle-on"></i> </a>
+                                        if (item.Status == 1)
+                                        {
+                                            <a class="btn btn-sm btn-light text-success border a33" href="@Url.Action("Status", "Rooms", new { id = item.Id })"> <i class="fas fa-toggle-on"></i> </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn btn-sm btn-light text-danger border a33" href="@Url.Action("Status", "Rooms", new { id = item.Id })"> <i class="fas fa-toggle-off"></i> </a>
+                                        }
                                     }
                                     else
                                     {
-                                        <a class="btn btn-sm btn-light text-danger border a33" href="@Url.Action("Status", "Rooms", new { id = item.Id })"> <i class="fas fa-toggle-off"></i> </a>
+                                        if (item.Status == 1)
+                                        {
+                                            <a class="btn btn-sm btn-light text-success border a33" > Đã duyệt </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn btn-sm btn-light text-danger border a33" >Chờ duyệt </a>
+                                        }
                                     }
                                     <a class="btn btn-sm btn-light text-danger border" href="@Url.Action("Deltrash", "Rooms", new { id = item.Id })"> <i class="fas fa-trash-alt"></i></a>
                                     <a class="btn btn-sm btn-light text-warning border" href="@Url.Action("Edit", "Rooms", new { id = item.Id })">

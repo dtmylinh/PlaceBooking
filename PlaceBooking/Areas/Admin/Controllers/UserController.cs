@@ -20,6 +20,7 @@ namespace PlaceBooking.Areas.Admin.Controllers
         // GET: Admin/User
         public ActionResult Index()
         {
+            ViewBag.Accessname = Session["AccessName"].ToString();
             var list = db.Users.Where(m => m.Status != 0 && m.Access != 0).OrderByDescending(m => m.Id).ToList();
             return View(list);
         }

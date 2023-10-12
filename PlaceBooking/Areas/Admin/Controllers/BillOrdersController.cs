@@ -42,9 +42,8 @@ namespace PlaceBooking.Areas.Admin.Controllers
                 Order order = db.Orders.Where(x => x.Code == mtopic.OrderCode).FirstOrDefault();
                 //category
                 mtopic.CreateDate = DateTime.Now;
-                mtopic.Total = (decimal)order.Total + mtopic.Surcharge + mtopic.ElectricityBillTotal + mtopic.WaterMoneyTotal;
+                mtopic.Total = (decimal)order.Total;
                 mtopic.UserId = order.UserId;
-                mtopic.ServiceID = 1;
                 db.BillOrders.Add(mtopic);
                 db.SaveChanges();
                 Message.set_flash("Thêm thành công", "success");
@@ -57,10 +56,10 @@ namespace PlaceBooking.Areas.Admin.Controllers
         public ActionResult Status(int id)
         {
             BillOrder mtopic = db.BillOrders.Find(id);
-            mtopic.Status = (mtopic.PaymentStatus == 1) ? 2 : 1;
+            mtopic.PaymentStatus = (mtopic.PaymentStatus == 1) ? 2 : 1;
             db.Entry(mtopic).State = EntityState.Modified;
             db.SaveChanges();
-            Message.set_flash("Thay đổi trang thái thành công", "success");
+            Message.set_flash("Đánh dấu thanh toán thành công", "success");
             return RedirectToAction("Index");
         }
     }

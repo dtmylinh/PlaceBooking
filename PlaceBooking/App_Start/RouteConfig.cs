@@ -96,12 +96,12 @@ namespace PlaceBooking
                  defaults: new { controller = "Site", action = "AllPost", id = UrlParameter.Optional }
              );
             routes.MapRoute(
-               name: "chi tiet chuyen bay",
+               name: "chi tiet phòng",
                url: "room-detail/{id}",
                defaults: new { controller = "Site", action = "roomDetail", id = UrlParameter.Optional }
            );
             routes.MapRoute(
-                name: "chuyen bay",
+                name: "Tất cả phòng",
                 url: "all-room",
                 defaults: new { controller = "Site", action = "AllRoom", id = UrlParameter.Optional }
             );

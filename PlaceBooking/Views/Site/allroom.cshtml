@@ -4,78 +4,221 @@
     ViewBag.Title = "flightSearch";
     Layout = "~/Views/Shared/_layOutSite.cshtml";
 }
+<section class="mt_search">
+    <div class="container-fluid card ">
+       
+        <div class="col-md-3 bg-white" style="padding:25px;">
+            <div class="search-content-slider">
 
-<section class="flight-destinations">
-    <div class="container bg-white">
-        <div class="row">
+                <form action="~/Site/roomSearch" method="POST" id="form-search">
+                    <div class="radio" align="center">
+                        <label><input value="TiecCuoi" type="radio" id="typeticket" name="LoaiTiec" checked>Tiệc cưới</label>
+                        <label><input value="SinhNhat" type="radio" id="typeticket" name="LoaiTiec">Sinh nhật</label>
+                        <label><input value="SuKien" type="radio" id="typeticket" name="LoaiTiec">Sự kiện</label>
+                        <label><input value="Khac" type="radio" id="typeticket" name="LoaiTiec">Khác</label>
+                    </div>
+                    <input type="hidden" id="ticketCheck" value="" />
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="table_item">
+                                <div class="form-group">
+                                    <select name="departure_address" class=" form-control" tabindex="1" required>
+                                        <option value="TP.Hồ Chí Minh">TP.Hồ Chí Minh</option>
+                                        <option value="Hà Nội">Hà Nội</option>
+                                        <option value="Quy Nhơn">Quy Nhơn</option>
+                                        <option value="An Giang">An Giang</option>
+                                        <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
+                                        <option value="Bạc Liêu">Bạc Liêu</option>
+                                        <option value="Bắc Giang">Bắc Giang</option>
+                                        <option value="Bắc Kạn">Bắc Kạn</option>
+                                        <option value="Bắc Ninh">Bắc Ninh</option>
+                                        <option value="Bến Tre">Bến Tre</option>
+                                        <option value="Bình Định">Bình Định</option>
+                                        <option value="Bình Dương">Bình Dương</option>
+                                        <option value="Bình Phước">Bình Phước</option>
+                                        <option value="Bình Thuận">Bình Thuận</option>
+                                        <option value="Cà Mau">Cà Mau</option>
+                                        <option value="Cần Thơ">Cần Thơ</option>
+                                        <option value="Cao Bằng">Cao Bằng</option>
+                                        <option value="Đà Nẵng">Đà Nẵng</option>
+                                        <option value="Đắk Lắk">Đắk Lắk</option>
+                                        <option value="Đắk Nông">Đắk Nông</option>
+                                        <option value="Điện Biên">Điện Biên</option>
+                                        <option value="Đồng Nai">Đồng Nai</option>
+                                        <option value="Đồng Tháp">Đồng Tháp</option>
+                                        <option value="Gia Lai">Gia Lai</option>
+                                        <option value="Hà Giang">Hà Giang</option>
+                                        <option value="Hà Nam">Hà Nam</option>
+                                        <option value="Hà Tĩnh">Hà Tĩnh</option>
+                                        <option value="Hải Dương">Hải Dương</option>
+                                        <option value="Hải Phòng">Hải Phòng</option>
+                                        <option value="Hậu Giang">Hậu Giang</option>
+                                        <option value="Hòa Bình">Hòa Bình</option>
+                                        <option value="Hưng Yên">Hưng Yên</option>
+                                        <option value="Khánh Hòa">Khánh Hòa</option>
+                                        <option value="Kiên Giang">Kiên Giang</option>
+                                        <option value="Kon Tum">Kon Tum</option>
+                                        <option value="Lai Châu">Lai Châu</option>
+                                        <option value="Lâm Đồng">Lâm Đồng</option>
+                                        <option value="Lạng Sơn">Lạng Sơn</option>
+                                        <option value="Lào Cai">Lào Cai</option>
+                                        <option value="Long An">Long An</option>
+                                        <option value="Nam Định">Nam Định</option>
+                                        <option value="Nghệ An">Nghệ An</option>
+                                        <option value="Ninh Bình">Ninh Bình</option>
+                                        <option value="Ninh Thuận">Ninh Thuận</option>
+                                        <option value="Phú Thọ">Phú Thọ</option>
+                                        <option value="Phú Yên">Phú Yên</option>
+                                        <option value="Quảng Bình">Quảng Bình</option>
+                                        <option value="Quảng Nam">Quảng Nam</option>
+                                        <option value="Quảng Ngãi">Quảng Ngãi</option>
+                                        <option value="Quảng Ninh">Quảng Ninh</option>
+                                        <option value="Quảng Trị">Quảng Trị</option>
+                                        <option value="Sóc Trăng">Sóc Trăng</option>
+                                        <option value="Sơn La">Sơn La</option>
+                                        <option value="Tây Ninh">Tây Ninh</option>
+                                        <option value="Thái Bình">Thái Bình</option>
+                                        <option value="Thái Nguyên">Thái Nguyên</option>
+                                        <option value="Thanh Hóa">Thanh Hóa</option>
+                                        <option value="Thừa Thiên-Huế">Thừa Thiên-Huế</option>
+                                        <option value="Tiền Giang">Tiền Giang</option>
+                                        <option value="Trà Vinh">Trà Vinh</option>
+                                        <option value="Tuyên Quang">Tuyên Quang</option>
+                                        <option value="Vĩnh Long">Vĩnh Long</option>
+                                        <option value="Vĩnh Phúc">Vĩnh Phúc</option>
+                                        <option value="Yên Bái">Yên Bái</option>
+                                    </select>
+                                    <i class="flaticon-maps-and-flags"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12">
+                            <div class="table_item">
+                                <div class="form-group">
+                                    <select name="songuoi" class=" form-control" tabindex="1">
+                                        <option value="100">Số người (Mặc định 100)</option>
+                                        <option value="50">50 trở lên</option>
+                                        <option value="100">100 trở lên</option>
+                                        <option value="200">200 trở lên</option>
+                                        <option value="400">400 trở lên</option>
+                                        <option value="500">500 trở lên</option>
+                                        <option value="600">600 trở lên</option>
+                                        <option value="800">800 trở lên</option>
+                                        <option value="1000">1000 Trở lên</option>
+                                    </select>
+                                    <i class="flaticon-box"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12">
+                            <div class="table_item">
+                                <div class="form-group">
+                                    <select name="soTienTu" class=" form-control" tabindex="1">
+                                        <option value="1000000">Số tiền từ 1.000.000 VND</option>
+                                        <option value="20000000">Số tiền từ 20.000.000 VND</option>
+                                        <option value="30000000">Số tiền từ 30.000.000 VND</option>
+                                        <option value="40000000">Số tiền từ 40.000.000 VND</option>
+                                        <option value="50000000">Số tiền từ 50.000.000 VND</option>
+                                        <option value="60000000">Số tiền từ 60.000.000 VND</option>
+                                        <option value="70000000">Số tiền từ 70.000.000 VND</option>
+                                        <option value="80000000">Số tiền từ 80.000.000 VND</option>
+                                        <option value="90000000">Số tiền từ 90.000.000 VND</option>
+                                        <option value="100000000">Số tiền từ 100.000.000 VND</option>
+                                    </select>
+                                    <i class="flaticon-box"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12">
+                            <div class="table_item">
+                                <div class="form-group">
+                                    <select name="soTienDen" class=" form-control" tabindex="1">
+                                        <option value="5000000">Số tiền đến 5.000.000 VND</option>
+                                        <option value="10000000">Số tiền đến 10.000.000 VND</option>
+                                        <option value="20000000">Số tiền đến 20.000.000 VND</option>
+                                        <option value="30000000">Số tiền đến 30.000.000 VND</option>
+                                        <option value="40000000">Số tiền đến 40.000.000 VND</option>
+                                        <option value="50000000">Số tiền đến 50.000.000 VND</option>
+                                        <option value="60000000">Số tiền đến 60.000.000 VND</option>
+                                        <option value="70000000">Số tiền đến 70.000.000 VND</option>
+                                        <option value="80000000">Số tiền đến 80.000.000 VND</option>
+                                        <option value="90000000">Số tiền đến 90.000.000 VND</option>
+                                        <option value="100000000">Số tiền đến 100.000.000 VND</option>
+                                    </select>
+                                    <i class="flaticon-box"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12  ">
+                            <div class="table_item " align="center">
+                                <div class="search ">
+                                    <button type="submit" class="btn-blue btn-red ">TIM KIẾM ĐỊA ĐIỂM</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-9">
             <form action="~/Checkout/Index" method="post">
                 <input type="hidden" name="songuoi" value="@ViewBag.songuoi" />
                 <div class="col-md-12 col-sm-12">
                     <div class="flight-head">
                         <div class="">
                             <nav aria-label="breadcrumb">
-                                <span style="font-weight:bold; font-size:22px;"> Dach sách địa điểm </span>
+                                <span style="font-weight:bold; font-size:22px;"> Tất cả địa điểm </span>
                             </nav>
                         </div>
                     </div>
 
-                    <div class="flight-table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Tên pòng</th>
-                                    <th>Tỉnh thành</th>
-                                    <th>Địa chỉ</th>
-                                    <th>Ngày cho thuê</th>
-                                    <th>Giá phòng</th>
-                                    <th>Xem chi tiết</th>
-                                    <th>Đặt phòng</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model)
-                                {
-                                    string name = item.Name;
-                                    <tr>
+                    <div class="destination-outer">
+                        @foreach (var item in Model)
+                        {
+                            <div class="destination-fw-item " style="padding-top:10px;">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="destination-fw-image">
+                                            <img src="~/Public/images/roomBooking/@item.Img" alt="Image">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 w-100">
+                                        <div class="destination-fw-desc fw-content ">
+                                            <h3><a style="color:#000000" href="~/room-detail/@item.Id">@item.Name</a></h3>
+                                            <div class="package-content">
+                                                <span class="btn btn-sm btn-info"> <span style="font-weight:bold;">Địa chỉ:</span> @Html.DisplayFor(modelItem => item.FullAddress)</span><br>
+                                                <span><span style="font-weight:bold;">Ngày đăng:</span> @item.CreatedAt.ToString("dd/MM/yyyy")</span><br>
+                                                <span><span style="font-weight:bold;">Số người:</span> @item.GuestTotal Người</span><br>
 
-                                        <td>@item.Name</td>
-                                        <td>
+                                            </div>
+                                            <div class="tour-price">
+                                                <p><span class="tour-tail">@item.Price.ToString("N0") VND</span></p>
+                                            </div>
+                                            @if (item.Status == 1)
+                                            {
+                                                <div class="" style="padding-top:15px;">
+                                                    <a class="btn-blue btn-blue" href="~/room-detail/@item.Id"> ĐẶT NGAY </a>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                @*  <div class="" style="margin-right:0;">
+                                                        <button class="btn-blue">TẠM ĐÓNG CỬA</button>
+                                                    </div>*@
 
-                                            @item.DepartureAddress
-                                        </td>
-                                        <td width="15%">  @Html.DisplayFor(modelItem => item.FullAddress)</td>
-                                        <td style="font-size:14px;">@item.DepartureDate.ToString("dd/MM/yyyy")</td>
-                                        <td style="font-size:14px;">@item.Price.ToString("N0") VND</td>
+                                                <p style="font-style: italic; color: red; font-weight: bold;" href="~/room-detail/@item.Id">Tạm đóng cửa</p>
+                                            }
 
-                                        <td>
-                                            <a href="~/room-detail/@item.Id">Xem chi tiết</a>
-                                        </td>
-                                        @if (item.IsBooking == 1)
-                                        {
+                                        </div>
+                                    </div>
 
-                                            <td>
-                                                <p class="text-danger">Phòng đã được đặt</p>
-                                            </td>
-                                        }
-                                        else
-                                        {
-                                            <td>
-                                                @Html.RadioButton("datve", item.Id, new { name = "idTitket", required = "required" })
-                                                @Html.Label("Đặt phòng")
-                                            </td>
-                                        }
-
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
+                                </div>
+                            </div>
+                        }
                     </div>
-
                     Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
                     <div class="pagination-content text-center">
                         <ul class="pagination">
-
-
                             <li>
                                 <a href="~/@ViewBag.url?page=1" class="single-btn prev-btn ">
                                     <i class="fa fa-angle-double-left" aria-hidden="true"></i>
@@ -94,7 +237,6 @@
                                     {
                                         lastpage = (int)Model.PageNumber + 1;
                                     }
-
                                 }
                                 <a href="~/@ViewBag.url?page=@firstPage" class="single-btn prev-btn ">
                                     <i class="fa fa-angle-left" aria-hidden="true"></i>
@@ -122,22 +264,10 @@
                             </li>
                         </ul>
                     </div>
-
-                </div>
-
-                <div class="container ">
-                    <div class="row">
-                        <div class="col-md-10">
-
-                        </div>
-
-                        <button class="btn-blue btn-red btn-style-1 " type="submit">Tiếp theo</button>
-                    </div>
                 </div>
             </form>
         </div>
     </div>
-
 </section>
 
 <!-- Destination Ends -->

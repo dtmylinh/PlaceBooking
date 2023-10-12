@@ -1,0 +1,50 @@
+﻿@model PlaceBooking.Models.Comment
+@{
+    ViewBag.Title = "EditComment";
+    Layout = "~/Views/Shared/_layOutSite.cshtml";
+}
+<script src="~/public/js/jquery.fancybox.min.js"></script>
+<link href="~/Public/css/jquery.fancybox.min.css" rel="stylesheet" />
+
+<section class="booking">
+        <div class="container bg-white" style="padding:20px;">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="booking-confirmed booking-outer">
+                        <div class="confirmation-title">
+                            <div class="form-title form-title-1">
+                                <h2 class="text-danger">
+                                    Cập nhật bình luận 
+                                </h2>
+                            </div>
+                            <div class="payment-info detail">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <form action="~/comment/edit" method="post">
+                                    <div class="form-group">
+                                        <input type="hidden" name="Id" value="@Model.ID" />
+                                        <label for="comment">Bình luận:</label>
+                                        <textarea class="form-control" id="comment" name="Comment1" rows="4">@Model.Comment1</textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+<style>
+    .title {
+        font-size: 17px;
+        font-weight: bold;
+        padding-right: 50px;
+        color: #ff0000;
+    }
+</style>
