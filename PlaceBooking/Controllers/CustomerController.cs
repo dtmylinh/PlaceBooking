@@ -22,7 +22,7 @@ namespace PlaceBooking.Controllers
     {
         private readonly string clientId = "844620552810-umuq8bscgjsrfh37v7jd1jlva2d5jmnd.apps.googleusercontent.com";
         private readonly string clientSecret = "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";
-        private readonly string redirectUri = "https://store165.xyz/Customer/GoogleCallback";
+        private readonly string redirectUri = "http://localhost:22222/Customer/GoogleCallback";
         private readonly string userInfoUrl = "https://www.googleapis.com/oauth2/v3/userinfo";
 
         private PlaceBookingDbContext db = new PlaceBookingDbContext();

@@ -4,15 +4,11 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
-using API_NganLuong;
-using PlaceBooking.nganluonAPI;
 using MoMo;
 using Newtonsoft.Json.Linq;
 using PlaceBooking.MomoAPI;
 using System.Globalization;
 using System.Data.Entity.Core.Objects;
-using System.Web.Services.Description;
-using Org.BouncyCastle.Asn1.X509;
 
 namespace PlaceBooking.Controllers
 {
@@ -272,36 +268,6 @@ namespace PlaceBooking.Controllers
         {
 
             return View("cancel_order");
-        }
-        //Khi thanh toán Ngan Luong XOng
-        public ActionResult confirm_orderPaymentOnline()
-        {
-            String Token = Request["token"];
-            RequestCheckOrder info = new RequestCheckOrder();
-            info.Merchant_id = nganluongInfo.Merchant_id;
-            info.Merchant_password = nganluongInfo.Merchant_password;
-            info.Token = Token;
-            APICheckoutV3 objNLChecout = new APICheckoutV3();
-            ResponseCheckOrder result = objNLChecout.GetTransactionDetail(info);
-            if (result.errorCode == "00")
-            {
-                String codeOrder = Session["OrderId1"].ToString();
-                var OrderInfo = db.Orders.OrderByDescending(m => m.Code == codeOrder).FirstOrDefault();
-                OrderInfo.StatusPayment = 1;
-                db.Entry(OrderInfo).State = EntityState.Modified;
-                db.SaveChanges();
-                ViewBag.paymentStatus = OrderInfo.StatusPayment;
-                ViewBag.Methodpayment = OrderInfo.DeliveryPaymentMethod;
-                //send email
-                //SendEmail(OrderInfo.email, OrderInfo.name);
-                return View("checkOutComfin", OrderInfo);
-            }
-            else
-            {
-                ViewBag.status = false;
-            }
-
-            return View("confirm_orderPaymentOnline");
         }
 
         //Khi huy thanh toán MOMO
