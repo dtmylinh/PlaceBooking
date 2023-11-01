@@ -1,9 +1,11 @@
-﻿using PlaceBooking.Models;
+﻿using PlaceBooking.Common;
+using PlaceBooking.Models;
 using System.Linq;
 using System.Web.Mvc;
 
 namespace PlaceBooking.Areas.Admin.Controllers
 {
+    [CustomAuthorizeAttribute(RoleID = "SALESMAN")]
     public class CommentsController : BaseController
     {
         private PlaceBookingDbContext db = new PlaceBookingDbContext();

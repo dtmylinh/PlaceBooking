@@ -11,8 +11,6 @@ using PlaceBooking.Models;
 
 namespace PlaceBooking.Areas.Admin.Controllers
 {
-    
-    [CustomAuthorizeAttribute(RoleID = "ADMIN")]
     [CustomAuthorizeAttribute(RoleID = "COPYWRITER")]
     public class TopicController : BaseController
     {

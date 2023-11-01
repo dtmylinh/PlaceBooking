@@ -11,6 +11,7 @@ using PlaceBooking.Models;
 
 namespace PlaceBooking.Areas.Admin.Controllers
 {
+    [CustomAuthorizeAttribute(RoleID = "SALESMAN")]
     public class BillOrdersController : BaseController
     {
         private PlaceBookingDbContext db = new PlaceBookingDbContext();
