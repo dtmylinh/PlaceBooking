@@ -18,6 +18,7 @@ namespace PlaceBooking.Controllers
         PlaceBookingDbContext db = new PlaceBookingDbContext();
         // GET: Checkout
         [HttpPost]
+        [Obsolete]
         public ActionResult Index(FormCollection fc)
         {
             int id = int.Parse(fc["idRoom"]);
@@ -191,6 +192,88 @@ namespace PlaceBooking.Controllers
 
             return View("checkOutComfin", order);
         }
+
+        // Khi huy thanh toán Ngan Luong
+        [HttpGet]
+        public ActionResult ContinuePayment(string OrderCode)
+        {
+            var order = db.Orders.Where(x=> x.Code == OrderCode).FirstOrDefault();
+
+            if (order == null)
+            {
+                Message.set_flash($"không tim thấy thông tin đơn hàng.", "danger");
+                return Redirect($"~/");
+            }
+
+            if (order.DeliveryPaymentMethod.Equals("Thanh toán chuyển khoản"))
+            {
+                return View("ContinuePayment");
+            }
+            if (order.DeliveryPaymentMethod.Equals("Thanh toán MOMO"))
+            {
+                Session["OrderCode1"] = order.Code;
+
+                if (order.Total > 10000000)
+                {
+                    Message.set_flash($"Phương thức thanh toán MOMO chỉ cấp nhận thanh toán dưới 10 triệu VND.", "danger");
+                    return Redirect($"~/");
+                }
+                //request params need to request to MoMo system
+                string endpoint = momoInfo.endpoint;
+                string partnerCode = momoInfo.partnerCode;
+                string accessKey = momoInfo.accessKey;
+                string serectkey = momoInfo.serectkey;
+                string orderInfo = momoInfo.orderInfo;
+                string returnUrl = momoInfo.returnUrl;
+                string notifyurl = momoInfo.notifyurl;
+
+                string amount = order.Total.ToString();
+                string orderid = Guid.NewGuid().ToString();
+                string requestId = Guid.NewGuid().ToString();
+                string extraData = "";
+
+                //Before sign HMAC SHA256 signature
+                string rawHash = "partnerCode=" +
+                    partnerCode + "&accessKey=" +
+                    accessKey + "&requestId=" +
+                    requestId + "&amount=" +
+                    amount + "&orderId=" +
+                    orderid + "&orderInfo=" +
+                    orderInfo + "&returnUrl=" +
+                    returnUrl + "&notifyUrl=" +
+                    notifyurl + "&extraData=" +
+                    extraData;
+
+                log.Debug("rawHash = " + rawHash);
+                MoMoSecurity crypto = new MoMoSecurity();
+                //sign signature SHA256
+                string signature = crypto.signSHA256(rawHash, serectkey);
+                log.Debug("Signature = " + signature);
+
+                //build body json request
+                JObject message = new JObject
+            {
+                { "partnerCode", partnerCode },
+                { "accessKey", accessKey },
+                { "requestId", requestId },
+                { "amount", amount },
+                { "orderId", orderid },
+                { "orderInfo", orderInfo },
+                { "returnUrl", returnUrl },
+                { "notifyUrl", notifyurl },
+                { "extraData", extraData },
+                { "requestType", "captureMoMoWallet" },
+                { "signature", signature }
+
+            };
+                log.Debug("Json request to MoMo: " + message.ToString());
+                string responseFromMomo = PaymentRequest.sendPaymentRequest(endpoint, message.ToString());
+                JObject jmessage = JObject.Parse(responseFromMomo);
+                return Redirect(jmessage.GetValue("payUrl").ToString());
+            }
+            return View("cancel_order");
+        }
+
         // Lấy thông tin các vé đã book
         public ActionResult _BookingConnfig(int orderId)
         {

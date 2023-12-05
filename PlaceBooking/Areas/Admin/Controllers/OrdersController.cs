@@ -50,7 +50,35 @@ namespace PlaceBooking.Areas.Admin.Controllers
             }
             return View(order);
         }
-   
+
+        // GET: Admin/Orders/Details/5
+        public ActionResult DetailsOrderCode(string orderCode)
+        {
+            if (string.IsNullOrEmpty(orderCode))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Order order = db.Orders.Where(x=>x.Code == orderCode).FirstOrDefault();
+
+            List<int> listServiceint = !string.IsNullOrEmpty(order.ServiceId) ? (order.ServiceId?.Split(',')
+                   ?.Select(int.Parse)
+                   ?.ToList() ?? null) : null;
+
+            List<int> listMenuint = !string.IsNullOrEmpty(order.MenuId) ? (order.MenuId?.Split(',')
+                               ?.Select(int.Parse)
+                               ?.ToList() ?? null) : null;
+
+            ViewBag.Service = listServiceint != null ? db.ExtendsBookings?.Where(x => x.Type == 2 && listServiceint.Contains(x.ID))?.ToList() : null;
+            ViewBag.Menu = listMenuint != null ? db.ExtendsBookings?.Where(x => x.Type == 1 && listMenuint.Contains(x.ID))?.ToList() : null;
+
+            if (order == null)
+            {
+                return HttpNotFound();
+            }
+            return View("Details", order);
+        }
+        
+
         public ActionResult _BookingConnfig(int orderId)
         {
             var list = db.Ordersdetails.Where(m => m.Orderid == orderId).ToList();

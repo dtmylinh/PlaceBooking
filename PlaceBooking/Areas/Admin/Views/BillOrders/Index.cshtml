@@ -84,6 +84,8 @@
                                     {
                                         <a class="btn btn-sm btn-light text-danger border a33" href="@Url.Action("Status", "BillOrders", new { id = item.Id })"> <i class="fas fa-toggle-off"></i> </a>
                                     }
+                                    <a class="btn btn-sm btn-light text-warning border" href="@Url.Action("DetailsOrderCode", "Orders", new { OrderCode = item.OrderCode })">
+                                        <i class="fas fa-eye"></i>
                                 </td>
                                 <td class="text-cam">@Html.DisplayFor(modelItem => item.Id)</td>
                             </tr>

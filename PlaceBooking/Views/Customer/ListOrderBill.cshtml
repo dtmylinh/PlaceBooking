@@ -46,7 +46,15 @@
 
 
                                 </td>
-                                <td><a class=" font-weight-bold card-link " href=""> @item.Total.ToString("N0") VND</a></td>
+                                @if (item.PaymentStatus == 1)
+                                {
+                                    <td><a class=" font-weight-bold card-link "> @item.Total.ToString("N0") VND</a></td>
+                                }
+                                else
+                                {
+                                    <td><a class=" font-weight-bold card-link " href="~/Checkout/ContinuePayment?OrderCode=@item.OrderCode"> @item.Total.ToString("N0") VND</a></td>
+                                }
+
                             </tr>
                             }
                         </tbody>

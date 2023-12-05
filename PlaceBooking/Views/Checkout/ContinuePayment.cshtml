@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "ads";
+    Layout = "~/Views/Shared/_layOutSite.cshtml";
+}
+<script src="~/public/js/jquery.fancybox.min.js"></script>
+<link href="~/Public/css/jquery.fancybox.min.css" rel="stylesheet" />
+
+<section class="booking">
+    <form action="~/checkout/index" method="post" style="padding-bottom:100px;">
+        <div class="container bg-white" style="padding:20px;">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="booking-confirmed booking-outer">
+                        <div class="confirmation-title">
+                            <div class="form-title form-title-1">
+                                <h2 class="text-danger">
+                                    <span> Thanh toán chuyển khoản</span>
+                                </h2>
+                            </div>
+                            <div class="payment-info detail">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <table class="table" style="margin-top:20px;">
+                                    <tbody>
+                                        <tr class="w-100">
+                                            <td class="title">
+                                                <span> Tên ngân hàng</span>
+                                            </td>
+                                            <td>TP Bank</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="title">Chủ tài khoản</td>
+                                            <td class="b-id text-danger">Đoàn Kiều Mỹ Ngọc</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="title">Số TK</td>
+                                            <td class="b-id text-danger">042129019501</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+<style>
+    .title {
+        font-size: 17px;
+        font-weight: bold;
+        padding-right: 50px;
+        color: #ff0000;
+    }
+</style>

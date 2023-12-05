@@ -135,7 +135,9 @@ namespace PlaceBooking.Controllers
             ViewBag.Service = db.ExtendsBookings.Where(x => x.Type == 2 && x.RoomId == id && x.Status == 1).ToList();
             ViewBag.Menu = db.ExtendsBookings.Where(x => x.Type == 1 && x.RoomId == id && x.Status == 1).ToList();
 
-            var single = db.Rooms.Where(m => /*m.Status == 1 &&*/ m.Id == id).First();
+            var single1 = db.Rooms.ToList();
+
+            var single = db.Rooms.Where(m =>m.Id == id).FirstOrDefault();
             return View("roomDetail", single);
         }
         public ActionResult lienHe()

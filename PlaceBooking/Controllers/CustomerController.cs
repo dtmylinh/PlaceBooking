@@ -20,9 +20,9 @@ namespace PlaceBooking.Controllers
 {
     public class CustomerController : Controller
     {
-        private readonly string clientId = "844620552810-umuq8bscgjsrfh37v7jd1jlva2d5jmnd.apps.googleusercontent.com";
-        private readonly string clientSecret = "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";
-        private readonly string redirectUri = "http://localhost:22222/Customer/GoogleCallback";
+        private readonly string clientId = "456350956011-768dsr8iunrhjsq15rhhgpkeopk8egh8.apps.googleusercontent.com";
+        private readonly string clientSecret = "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";
+        private readonly string redirectUri = "https://hi-static-spf.site/Customer/GoogleCallback";
         private readonly string userInfoUrl = "https://www.googleapis.com/oauth2/v3/userinfo";
 
         private PlaceBookingDbContext db = new PlaceBookingDbContext();
@@ -49,6 +49,12 @@ namespace PlaceBooking.Controllers
                 Message.set_flash("Không tìm thấy thông tin tài khoản, vui lòng thử lại.", "danger");
                 return Redirect("~/customer/verifyOTP");
             }
+            if (oTP != user_accountOTP.OTP)
+            {
+                Message.set_flash("OTP không đúng vui lòng thử lại.", "danger");
+                return Redirect("~/customer/verifyOTP");
+            }
+
             user_accountOTP.Status = 1;
             db.Entry(user_accountOTP).State = EntityState.Modified;
             db.SaveChanges();

@@ -52,6 +52,7 @@ namespace PlaceBooking.Areas.Admin.Controllers
         [ValidateInput(false)]
         public ActionResult Create(Post mpost)
         {
+            mpost.Topid = 20;
             if (ModelState.IsValid)
             {
                 HttpPostedFileBase file;
@@ -109,6 +110,7 @@ namespace PlaceBooking.Areas.Admin.Controllers
         [ValidateInput(false)]
         public ActionResult Edit( Post mpost)
         {
+            mpost.Topid = 20;
             if (ModelState.IsValid)
             {
                 HttpPostedFileBase file;

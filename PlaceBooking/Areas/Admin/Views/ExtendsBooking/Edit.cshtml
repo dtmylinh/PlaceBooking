@@ -8,8 +8,10 @@
     List<SelectListItem> listcat = new List<SelectListItem>();
     List<SelectListItem> listorder = new List<SelectListItem>();
     List<SelectListItem> status = new List<SelectListItem>();
+    SelectListItem statusitem1 = new SelectListItem() { Value = "1", Text = "Hiện " };
     SelectListItem statusitem2 = new SelectListItem() { Value = "2", Text = "Ẩn " };
     status.Add(statusitem2);
+    status.Add(statusitem1);
 
     List<SelectListItem> extends = new List<SelectListItem>();
     SelectListItem extendsItem1 = new SelectListItem() { Value = "1", Text = "Thực đơn" };
@@ -82,7 +84,7 @@
                     </div>
                     <div>
                         <label for="psw"><span class="text-secondary font-weight-bold">Giá</span></label>
-                        <input type="number" name="price" class="form-control" value="@Model.Price" required />
+                        <input type="number" name="price" class="form-control" value="@Model.Price" min="100000" required />
                     </div>
                     <div>
                         <label for="psw"><span class="text-secondary ">Loại</span></label>

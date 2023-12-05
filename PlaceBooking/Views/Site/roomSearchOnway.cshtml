@@ -191,8 +191,9 @@
                                                 <span class="btn btn-sm btn-info"> <span style="font-weight:bold;">Địa chỉ:</span> @Html.DisplayFor(modelItem => item.FullAddress)</span><br>
                                                 <span><span style="font-weight:bold;">Ngày đăng:</span> @item.CreatedAt.ToString("dd/MM/yyyy")</span><br>
                                                 <span><span style="font-weight:bold;">Số người:</span> @item.GuestTotal Người</span><br>
-                                                
-                                            </div>
+                                                <span><span style="font-weight:bold;">Số tầng:</span> @item.PlaceDetail</span><br>
+                                            </div>                        
+
                                             <div class="tour-price">
                                                 <p><span class="tour-tail">@item.Price.ToString("N0") VND</span></p>
                                             </div>
@@ -204,9 +205,9 @@
                                             }
                                             else
                                             {
-                                              @*  <div class="" style="margin-right:0;">
-                                                    <button class="btn-blue">TẠM ĐÓNG CỬA</button>
-                                                </div>*@
+                                                @*  <div class="" style="margin-right:0;">
+                <button class="btn-blue">TẠM ĐÓNG CỬA</button>
+            </div>*@
 
                                                 <p style="font-style: italic; color: red; font-weight: bold;" href="~/room-detail/@item.Id">Tạm đóng cửa</p>
                                             }
@@ -219,53 +220,6 @@
                         }
                     </div>
                     Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
-                    <div class="pagination-content text-center">
-                        <ul class="pagination">
-                            <li>
-                                <a href="~/@ViewBag.url?page=1" class="single-btn prev-btn ">
-                                    <i class="fa fa-angle-double-left" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                            <li>
-                                @{
-                                    var firstPage = 1;
-                                    if ((int)Model.PageNumber > 1)
-                                    {
-                                        firstPage = (int)Model.PageNumber - 1;
-                                    }
-
-                                    var lastpage = Model.PageNumber;
-                                    if (lastpage < Model.PageCount)
-                                    {
-                                        lastpage = (int)Model.PageNumber + 1;
-                                    }
-                                }
-                                <a href="~/@ViewBag.url?page=@firstPage" class="single-btn prev-btn ">
-                                    <i class="fa fa-angle-left" aria-hidden="true"></i>
-                                </a>
-                            </li>
-
-                            @for (int i = Model.PageNumber; i <= Model.PageCount; i++)
-                            {
-
-                                if (i < Model.PageNumber + 5)
-                                {
-                                    <li id="active_@i"><a href="~/@ViewBag.url?page=@i" class="single-btn">@i  </a></li>
-                                }
-
-                            }
-                            <li>
-                                <a href="~/@ViewBag.url?page=@lastpage" class="single-btn next-btn">
-                                    <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="~/@ViewBag.url?page=@Model.PageCount" class="single-btn next-btn">
-                                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
             </form>
         </div>

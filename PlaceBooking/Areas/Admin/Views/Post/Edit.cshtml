@@ -53,6 +53,7 @@
                 @Html.HiddenFor(model => model.CreatedAt)
                 @Html.HiddenFor(model => model.CreatedBy)
                 @Html.HiddenFor(model => model.Img)
+                @Html.HiddenFor(model => model.Topid)
                 <div class=" row ">
                     <div class="col-md-4">  </div>
                     <div class="col-md-4"> <h3 class="text-center font-weight-bold text-success "> CẬP NHẬT BÀI VIẾT</h3> </div>
@@ -82,12 +83,6 @@
 
                     </div>
                     <div class="col-md-4">
-
-                        <label for="psw"><span class="text-secondary ">Chọn loại Loại Bài viết</span></label>
-                        <div>
-                            @Html.DropDownListFor(model => model.Topid, listcat, new { @class = "form-control", @required = "required" })
-                            @Html.ValidationMessageFor(model => model.Topid, "", new { @class = "text-danger" })
-                        </div>
                         <div>
                             <label for="psw"><span class="text-secondary ">Hình ảnh Bài viết</span></label>
                             <input type="file" class="form-control" name="img" />

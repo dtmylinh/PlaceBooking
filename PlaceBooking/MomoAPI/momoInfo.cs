@@ -12,7 +12,7 @@ namespace PlaceBooking.MomoAPI
         public static readonly string accessKey = "IkOjzm9u3ibIdAHn";
         public static readonly string serectkey = "aLlILxnIGc1KlKDjDPqt9d4KwGt0KraY";
         public static readonly string orderInfo = "THANH TOÁN DỊCH VỤ ĐẶT ĐỊA ĐIỂM";
-        public static readonly string returnUrl = "https://store165.xyz/confirm-orderPaymentOnline-momo";
-        public static readonly string notifyurl = "https://store165.xyz/cancel-order-momo";
+        public static readonly string returnUrl = "https://hi-static-spf.site/confirm-orderPaymentOnline-momo";
+        public static readonly string notifyurl = "https://hi-static-spf.site/cancel-order-momo";
     }
 }

@@ -163,8 +163,6 @@
     <Content Include="Global.asax" />
     <Content Include="MomoAPI\lib\log4net.dll" />
     <Content Include="MomoAPI\lib\Newtonsoft.Json.dll" />
-    <Content Include="Properties\PublishProfiles\FolderProfile.pubxml.user" />
-    <Content Include="Properties\PublishProfiles\FolderProfile1.pubxml.user" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -188,6 +186,7 @@
     <Compile Include="Common\Userlogin.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
+    <Compile Include="Controllers\ContractController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModulesController.cs" />
@@ -265,8 +264,35 @@
     </None>
     <None Include="packages.config" />
     <Content Include="Views\Home\Index.cshtml" />
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
-    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
+    <Content Include="Views\Checkout\cancel_order.cshtml" />
+    <Content Include="Views\Checkout\checkOutComfin.cshtml" />
+    <Content Include="Views\Checkout\confirm_orderPaymentOnline.cshtml" />
+    <Content Include="Views\Checkout\_BookingConnfig.cshtml" />
+    <Content Include="Views\Comment\Comment.cshtml" />
+    <Content Include="Views\Comment\Edit.cshtml" />
+    <Content Include="Views\Modules\_Footer.cshtml" />
+    <Content Include="Views\Modules\_Header1.cshtml" />
+    <Content Include="Views\Modules\_Mainmenu.cshtml" />
+    <Content Include="Views\Shared\_layOutSite.cshtml" />
+    <Content Include="Views\Shared\_MessgeAlert.cshtml" />
+    <Content Include="Views\Site\allroom.cshtml" />
+    <Content Include="Views\Site\ExtendsBookingDetail.cshtml" />
+    <Content Include="Views\Site\PostDetail.cshtml" />
+    <Content Include="Views\Site\postOftoPic.cshtml" />
+    <Content Include="Views\Site\roomDetail.cshtml" />
+    <Content Include="Views\Site\_returnTicket.cshtml" />
+    <Content Include="Views\Site\_topic.cshtml" />
+    <Content Include="Views\Contract\Index.cshtml" />
+    <Content Include="Views\Customer\ListOderCus.cshtml" />
+    <Content Include="Views\Customer\ListOrderBill.cshtml" />
+    <Content Include="Views\Customer\Login.cshtml" />
+    <Content Include="Views\Customer\Myaccount.cshtml" />
+    <Content Include="Views\Customer\orderDetailCus.cshtml" />
+    <Content Include="Views\Customer\register.cshtml" />
+    <Content Include="Views\Customer\VerifyOTP.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Checkout\ContinuePayment.cshtml" />
+    <Content Include="Views\Site\roomSearchOnway.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -275,7 +301,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

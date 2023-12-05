@@ -5,6 +5,23 @@
     Layout = "~/Areas/Admin/Views/Shared/_layOutAdmin.cshtml";
 }
 
+@{
+    List<SelectListItem> status = new List<SelectListItem>();
+
+    SelectListItem type = new SelectListItem() { Value = "TiecCuoi", Text = "Tiệc cưới" };
+    SelectListItem type1 = new SelectListItem() { Value = "SinhNhat", Text = "Sinh nhật" };
+    SelectListItem type2 = new SelectListItem() { Value = "SuKien", Text = "Sự kiện" };
+    status.Add(type);
+    status.Add(type1);
+    status.Add(type2);
+
+}
+
+<select name="RoomType" class="selectpicker form-control" tabindex="1" required>
+    <option selected value="TiecCuoi">Tiệc cưới</option>
+    <option value="SinhNhat">Sinh nhật</option>
+    <option value="SuKien">Sự kiện</option>
+</select>
 
 <div class="card card-title bg-white p-1 container">
     <div class="row">
@@ -134,13 +151,9 @@
                 </div>
                 <div class="col-md-4 ">
                     <div>
-                        <label for="psw"><span class="text-secondary font-weight-bold">Loại tiệc</span></label>
-                        <select name="RoomType" class="selectpicker form-control" tabindex="1" required>
-                            <option selected value="TiecCuoi">Tiệc cưới</option>
-                            <option value="SinhNhat">Sinh nhật</option>
-                            <option value="SuKien">Sự kiện</option>
-                            <option value="Khac">Khác</option>
-                        </select>
+                        <label for="psw"><span class="text-secondary ">Loại tiệc</span></label>
+                        @Html.DropDownListFor(model => model.RoomType, status, new { @class = "form-control", @required = "required" })
+                        @Html.ValidationMessageFor(model => model.RoomType, "", new { @class = "text-danger" })
                     </div>
                     <div>
                         <label for="psw"><span class="text-dark ">Hình ảnh</span></label>
@@ -148,16 +161,20 @@
                     </div>
                     <div>
                         <label for="psw"><span class="text-secondary font-weight-bold">Số lượng người</span></label>
-                        @Html.EditorFor(model => model.GuestTotal, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                        @Html.EditorFor(model => model.GuestTotal, new { htmlAttributes = new { @class = "form-control", @required = "required",
+                       @min = "1",      
+                       @max = "10000"
+                   } })
                         @Html.ValidationMessageFor(model => model.GuestTotal, "", new { @class = "text-danger" })
                     </div>
                     <div>
                         <label for="psw"><span class="text-secondary font-weight-bold">Tiền thuê</span></label>
-                        <input type="number" name="price" class="form-control" value="" required/>
+                        <input type="number" name="price" class="form-control" value="" min="100000" required />
                     </div>
                     <div>
                         <label for="psw"><span class="text-secondary font-weight-bold">Trạng thái</span></label>
                         <select name="status" class="selectpicker form-control" tabindex="1" required>
+                            <option value="1">Hiện</option>
                             <option value="2">Ẩn</option>
                         </select>
                     </div>
@@ -167,9 +184,9 @@
     </div>
 </section>
 <script>
-        $("#post").addClass("active");
-        $(function () {
-            // Summernote
-            $('.textarea').summernote()
-        })
+    $("#post").addClass("active");
+    $(function () {
+        // Summernote
+        $('.textarea').summernote()
+    })
 </script>
